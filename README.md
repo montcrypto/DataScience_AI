@@ -62,7 +62,7 @@ Materials for lecture 2021 MU
 
 Python3をインストールします。このテキスト執筆時点で、最新のバージョンは　3.10ということですので、そのうち4が出てきてまたアタフタする様なことになりそうですが、とりあえず6ヶ月くらい前にレリースされた安定バージョンをインストールするのがいいように思います。理由は、科学技術計算や機械学習で利用するパッケージの対応を遅れている可能性があるからです。ちなみに私はM1 Macを使っていますが、Pythonは3.8.２です。インストールの際、scikit-learn, scikit-image, tensorflowという、パターン認識、機械学習、画像処理に必要なものが問題なく動くバージョンということ選択しました。
 
-あまり悩むことなく標準のパイソンをhttps://www.python.org/からインストールしてみましょう。
+あまり悩むことなく標準のパイソンをhttps://www.python.org/ からインストールしてみましょう。
 必要なパッケージはその都度インストールしますが、この講義では使うのは以下の通りです。
 numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow, openpyxl, pillow, jupyter, jupyterlab, ipython, seaborn, hdf5
 
