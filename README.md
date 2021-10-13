@@ -67,3 +67,22 @@ Python3をインストールします。このテキスト執筆時点で、最�
 numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow, openpyxl, pillow, jupyter, jupyterlab, ipython, seaborn, hdf5
 
 ## ２　電卓を作る
+
+２ー１　Pythonで扱うデータ
+
+取り扱うデータ型は以下の通りです。
++ ブール値（Boolean)：TrueとかFalseという値
++ 整数（integer):小数点以下がない数
++ 浮動小数点数（float):少数以下を含む数、指数表現で表される数
++ 文字列（character):文字の並びで表されるもの
+
+２−１　演算子
+
+四則演算で必須なものは以下の通りです。
++ +:加算
++ -:減算
++ *:乗算
++ **:指数
++ /:浮動小数点数の割り算
++ //:整数の除算（商切り捨て）
++ %：剰余
