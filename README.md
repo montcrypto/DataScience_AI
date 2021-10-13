@@ -17,10 +17,14 @@ Materials for lecture 2021 MU
 １　Pythonのインストールなど
 
 ２　電卓をつくる
-	２−１　演算記号
-	２−２　比較演算子
-	２−３　データのタイプ
-	２−４　
+
+２−１　演算記号
+
+２−２　比較演算子
+
+２−３　データのタイプ
+
+２−４　練習
 
 ３　取扱うデータについて
 	３−１
@@ -68,7 +72,7 @@ numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow,
 
 ## ２　電卓を作る
 
-２ー１　Pythonで扱うデータ
+#### ２ー１　Pythonで扱うデータ
 
 取り扱うデータ型は以下の通りです。
 + ブール値（Boolean)：TrueとかFalseという値
@@ -76,7 +80,7 @@ numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow,
 + 浮動小数点数（float):少数以下を含む数、指数表現で表される数
 + 文字列（character):文字の並びで表されるもの
 
-２−１　演算子
+#### ２−１　演算子
 
 四則演算で必須なものは次の通りです。
 + +：加算
@@ -87,7 +91,7 @@ numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow,
 + //：整数の除算（商切り捨て）
 + %：剰余
 
-２−２　比較演算子
+#### ２−２　比較演算子
 
 主な比較演算子は次の通りです。
 
@@ -98,7 +102,7 @@ numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow,
 + a == b：a と b は等しい
 + a != b：a と b は等しくない
 
-２−３　練習
+#### ２−３　練習
 
 １）9時00分00秒から3333秒後は、何時間何分何秒後ですか？
 
@@ -109,6 +113,30 @@ numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow,
 
 
 # 3 データの型
+
+電卓の時は、１つの入力に対して1つの出力があった。ここで取り上げるデータは複数あるいはもっと多元的な複雑なデータである。まずは一次元の要素の並びを考える。
+
+前出の文字列がどう扱われるかを説明しましょう。’university' という文字列は、数値と違って、アルファベットの列と捉えられ、単語全体では10個の文字からなると認識されます。整数のインデックスで先頭から順番に各要素を取り出すことができ、3番目は'i’の文字というように、一つのシークエンスとして扱えます。pythonでは要素の1つ目を０に定義するので、3番目は0,1,2の２となることに注意しましょう。
+
+word='university'
+
+print(len(word), word[2])
+
+
+
+これと同じように、リストとタプル型のシーケンス構造が提供されています。リストは変更のきくシークエンス（並び替えが可能）で、タプルは辞書向きで、書き換えることができません。前者をミュータブル(mutable)、後者をいミュータブル(immutable)といいます。
+
+#### 3-1 リスト
+
+リストは０個以上の要素をカンマで区切り角かっこ[　]で囲んだものです。
+
+subjects=['physics', 'chemistry', 'biology', 'history']
+
+score=[88,75,87,92]
+
+list( )関数は他のデータ型をリストに変換します。例えば、文字列の場合
+
+list('university')　を
 
 
 
