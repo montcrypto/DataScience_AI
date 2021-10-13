@@ -104,6 +104,24 @@ numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow,
 
 #### ２−３　練習
 
+```python
+>>> a=5.0  # .0 をつけて浮動小数点数と定義する
+>>> b=23.0
+>>> b/a　　#結果を浮動小数点数で表示
+4.6
+>>> b//a　#商は
+4.0
+>>> b			#余は
+3.0
+>>> def warizan(x,y):  # 商と余をどうじに計算する自分の関数
+...     sho=x//y
+...     amari=x%y
+...     print(sho,' amari ',amari)
+... 
+>>> warizan(34,6)
+(5, ' amari ', 4)
+```
+
 １）9時00分00秒から3333秒後は、何時間何分何秒後ですか？
 
 ２）1)を計算する関数を作りなさい。
@@ -118,9 +136,11 @@ numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow,
 
 前出の文字列がどう扱われるかを説明しましょう。’university' という文字列は、数値と違って、アルファベットの列と捉えられ、単語全体では10個の文字からなると認識されます。整数のインデックスで先頭から順番に各要素を取り出すことができ、3番目は'i’の文字というように、一つのシークエンスとして扱えます。pythonでは要素の1つ目を０に定義するので、3番目は0,1,2の２となることに注意しましょう。
 
-word='university'
-
-print(len(word), word[2])
+```python
+>>> word='university'
+>>> print(len(word), word[2])
+(10, 'i')
+```
 
 
 
@@ -130,13 +150,28 @@ print(len(word), word[2])
 
 リストは０個以上の要素をカンマで区切り角かっこ[　]で囲んだものです。
 
-subjects=['physics', 'chemistry', 'biology', 'history']
-
-score=[88,75,87,92]
+```python
+>>> subjects=['physics', 'chemistry', 'biology', 'history']
+>>> score=[88,75,87,92]
+>>> subjects[2],score[2]
+('biology', 87)
+>>> subjects[0:2]
+['physics', 'chemistry']
+>>> subjects[::2]
+['physics', 'biology']
+>>> subjects[::-1]
+['history', 'biology', 'chemistry', 'physics']
+```
 
 list( )関数は他のデータ型をリストに変換します。例えば、文字列の場合
 
-list('university')　を
+```python
+>>> list('university')
+['u', 'n', 'i', 'v', 'e', 'r', 's', 'i', 't', 'y']
+>>> word2='university'
+>>> word2.split('r')
+['unive', 'sity']
+```
 
 
 
