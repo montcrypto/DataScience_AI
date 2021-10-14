@@ -85,9 +85,11 @@ numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow,
 
 
 
-#### １−2　Google Collaborationの利用
+#### １−2　クラウドサービスの利用
 
-どうしても環境がととのわない人は、クラウドサービスを利用できます。
+Colaboratory（略称: Colab）は、ブラウザから Python を記述、実行できるサービスです。Googleの提供するサービスなので利用する人はGoogleアカウントを取得してください。計算時間とか、ファイルの保存期間とかに制限がありますが、お試しには夢のようなサービスです。
+
+https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU_qrC0
 
 
 
