@@ -77,9 +77,9 @@ Python3をインストールします。このテキスト執筆時点で、最�
 必要なパッケージはその都度インストールしますが、この講義では使うのは以下の通りです。
 numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow, openpyxl, pillow, jupyter, jupyterlab, ipython, seaborn, hdf5
 
-<img src="https://www.python.org/static/img/python-logo@2x.png" style="zoom: 25%;" />
-<img src="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
-<img src="https://scikit-image.org/_static/img/logo.png" style="zoom:25%;" />
+<img src="https://www.python.org/static/img/python-logo@2x.png" height="50" />
+<img src="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" height="50" />
+<img src="https://scikit-image.org/_static/img/logo.png" height="50" />
 
 ハードディスクに余裕があって、いろいろな科学技術計算のパッケージがプレインストールされる方がいいばあいは、anaconda pythonをインストールしてください。
 
@@ -142,7 +142,7 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 ...     sho=x//y
 ...     amari=x%y
 ...     print(sho,' amari ',amari)
-... 
+...
 >>> warizan(34,6)
 (5, ' amari ', 4)
 ```
@@ -212,7 +212,7 @@ set(['a', ' ', 'g', 'i', 'j', 'm', 'n', 's', 'u', 'y'])
 set([' ', 'e', 'd', 'i', 'n', 's', 'r', 'u', 't', 'v', 'y'])
 >>> sorted(set(lw),key=lw.index)　# 使われている文字の要素をリストの順番に書き出す
 ['u', 'n', 'i', 'v', 'e', 'r', 's', 't', 'y', ' ', 'd']
-# 
+#
 >>> {'u', 'n', 'i', 'v', 'e', 'r', 's', 'i', 't', 'y', ' ', 's', 't', 'u', 'd', 'e', 'n', 't'}
 set([' ', 'e', 'd', 'i', 'n', 's', 'r', 'u', 't', 'v', 'y'])
 ```
