@@ -77,7 +77,7 @@ Python3をインストールします。このテキスト執筆時点で、最�
 必要なパッケージはその都度インストールしますが、この講義では使うのは以下の通りです。
 numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow, openpyxl, pillow, jupyter, jupyterlab, ipython, seaborn, hdf5
 
-<img src="/Users/sugiyama/Library/Application Support/typora-user-images/image-20211014091136779.png" alt="image-20211014091136779" style="zoom: 50%;" />![logo](https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png)<img src="https://scikit-image.org/_static/img/logo.png" alt="img" style="zoom:50%;" />
+<img src="https://www.python.org/static/img/python-logo@2x.png" alt="image-20211014091136779" style="zoom: 50%;" />![logo](https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png)<img src="https://scikit-image.org/_static/img/logo.png" alt="img" style="zoom:50%;" />
 
 ハードディスクに余裕があって、いろいろな科学技術計算のパッケージがプレインストールされる方がいいばあいは、anaconda pythonをインストールしてください。
 
