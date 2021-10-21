@@ -147,7 +147,7 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 (5, ' amari ', 4)
 ```
 
-１）9時00分00秒から3333秒後は、何時間何分何秒後ですか？
+１）9時00分00秒から3333秒後は、何時何分何秒ですか？
 
 ２）1)を計算する関数を作りなさい。
 
