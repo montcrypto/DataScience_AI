@@ -262,3 +262,111 @@ False
 
 
 
+ ### イテラブル・イテレーター
+
+
+
+イテラブル(iterable)とか、イテレータ(iterator)とは『反復可能な』や『繰り返し可能な』という意味です。この要素を使いこなせるようになると一気にやれることが増えてきます。
+
+「パソコンは「繰り返し処理をやらせるには最適」だけど考えるのは人間！」とは30年前の言葉ですが、ある意味で今でも真実です。その繰り返しの処理を考えてみましょう。
+
+パソコンにログインしていつものように作業をします。そのときあなたのディレクトリーはどこですか？この質問、30年前であれば皆正解かもしれない質問ですが、みなさんはどうでしょうか。GUI（graphic user interface)のおかげで、知る必要のない皆さんは質問の意味がわかるでしょうか。
+
+```python
+>>> import os
+>>> os.getcwd()
+'/Users/sugiyama'
+>>> os.listdir()
+['Music','Pictures', 'Applications', 'Documents']
+```
+
+上に示したコードのos.listdir()は私のコンピュータの中のディレクトリをリスト型で出力していることがわかります。 list形式のデータはイテラブルなので、繰り返し処理につかえます。例として、ディレクトリの中にいくつファイルがあるか順番に出力してみます。
+
+```python
+>>> My_dir=os.listdir()
+>>> for my_output in My_dir:
+>>>   tmp_files=os.listdir(my_output)
+>>>		print('ディレクトリ'+my_outpu+'のファイル数は'+str(len(tmp_files)))
+ディレクトリMusicのファイル数は4
+ディレクトリPicturesのファイル数は6
+ディレクトリApplicationsのファイル数は1
+ディレクトリDocumentsのファイル数は8
+```
+
+上の簡単なfor ~ in の簡単なループは、My_dirの中のリストから、ひとつづつmy_outputに出力して、印刷せよという意味になります。
+
+以上リスト型のですが、数字の場合もrange()という便利なイテレーターが準備されています。
+
+```python
+>>> list(range(10)) # range(0,10,1) と同じ
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> list(range(1,10,3)
+[1, 4, 7]
+```
+
+
+
+#### 条件文　if
+
+例えば解析用に作ったデータの中にいわゆる不可視ファイル（実際に存在はするのだけど画面上には表示されないシステムが使うファイル）があります。ところが、プログラムでデータを読み込むとファイルが全部読まれてしまいします。それを避けてファイルを読むには次のように処理します。
+
+```python
+>>> My_jpg_list=[]
+>>> My_list=os.listdir('Gaszou')
+>>> for filename in My_list:
+>>>		if filename.endswith('.jpg')
+>>>			My_jpg_list.append(filename)
+>>>		elif 
+>>>			print(filename+'is not a jpg file !')
+>>> My_jpg_list
+```
+
+上の例では、Gazouのファイルにあるファイルのうち、拡張子が.jpgでないものを無視してjpegファイルのみのリストをMy_jpg_listに格納します。
+
+複数の用件を同時に満足する、あるいはどちらかを満足するという条件が必要な場合は、AND あるいはOR で複数の条件を併記します。
+
+```python
+>>> testdata=[1,2,3,4,5,6,7,8,9,0]
+>>> for i in testdata:
+...   if i > 4 and i<7:
+...       print(i)
+5
+6
+```
+
+
+
+以上のように、イテレータと条件分はプログラムの中で、繰り返す・判断するという二つの重要なプロセスを実現します。
+
+
+
+#### 内包的表現
+
+繰り返しと条件分は数行のプログラムで書けるものですが、内包的表現を使うと１行で書くことができます。
+
+例えば ある特定のディレクトリの中から特定の拡張子のファイルだけを読み出したい場合、そのリストを作るには次のようにします。
+
+```python
+[fi for fl in os.listdir('my_target_dir') if fl.endswith('.xslx')]  ＃　例えばエクセルのファイル
+```
+
+また、不可視ファイルを除いたリストが欲しい場合（MacOSの場合は .filenameの形式で最初にドットがつきます）には次のようにします。
+
+```python
+[fi for fl in os.listdir('my_target_dir') if fl.startswith('.')]  ＃　例えば不可視ファイル
+```
+
+
+
+#### ジェネレーター
+
+```python
+x=list(range(10000))
+def gen(x):
+	tmp=[]
+	for i in x:
+		tmp.append(i)
+		if len(tmp)%%1000==0:  #### ここが問題
+			yield tmp
+```
+
