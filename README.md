@@ -65,6 +65,8 @@ Materials for lecture 2021 MU
 
 ## 1　Pythonのインストールなど
 
+
+
 #### １ー１　標準python
 
 理科系ではMatLabやRなどを使用したことがあるかもしれませんし、JavaやCの言語を使える方もいるでしょう。Pythonはそれに比べて、汎用性の高いライブラリーが多く開発され、科学分析において多くの人が使うようになりました。科学計算に必要なライブラリーが備わってきたこと、さらには読みやすく、書きやすく設計された言語であることが人気の一つと言われます。また、Githubなどの共同開発のサイトなどの活用により、コードが何度も読まれ、改訂されるたびに、さらに分かりやすくなるといわれます。なぜpythonかといえば、そういうコミュニティーがあり、常に良い言語を話そうとする人たちが、有益な情報をネットに上げてくれているということも上げておくべきでしょう。
@@ -75,7 +77,7 @@ Python3をインストールします。このテキスト執筆時点で、最�
 
 あまり悩むことなく標準のパイソンをhttps://www.python.org/ からインストールしてみましょう。
 必要なパッケージはその都度インストールしますが、この講義では使うのは以下の通りです。
-numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow, openpyxl, pillow, jupyter, jupyterlab, ipython, seaborn, hdf5
+numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow, openpyxl, pillow, jupyter, jupyterlab, ipython, seaborn, hdf5, geopanda, 
 
 <img src="https://www.python.org/static/img/python-logo@2x.png" height="50" >
 <img src="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" height="50" >
@@ -97,6 +99,8 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 
 ## ２　電卓を作る
 
+
+
 #### ２ー１　Pythonで扱うデータ
 
 取り扱うデータ型は以下の通りです。
@@ -104,6 +108,8 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 + 整数（integer):小数点以下がない数
 + 浮動小数点数（float):少数以下を含む数、指数表現で表される数
 + 文字列（character):文字の並びで表されるもの
+
+
 
 #### ２−１　演算子
 
@@ -116,6 +122,8 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 + //：整数の除算（商切り捨て）
 + %：剰余
 
+
+
 #### ２−２　比較演算子
 
 主な比較演算子は次の通りです。
@@ -126,6 +134,8 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 + a >= b：a は b と等しいか大きい
 + a == b：a と b は等しい
 + a != b：a と b は等しくない
+
+
 
 #### ２−３　練習
 
@@ -171,6 +181,8 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 
 これと同じように、リストとタプル型のシーケンス構造が提供されています。リストは変更のきくシークエンス（並び替えが可能）で、タプルは辞書向きで、書き換えることができません。前者をミュータブル(mutable)、後者をいミュータブル(immutable)といいます。
 
+
+
 #### ３−１ リスト型
 
 リストは０個以上の要素をカンマで区切り角かっこ[　]で囲んだものです。リストの中の要素は、先頭から順番に指定して取り出すこと、範囲を決めて複数取り出すこと、など色々設定可能です。
@@ -197,6 +209,7 @@ list( )関数は他のデータ型をリストに変換します。例えば、�
 >>> word.split('r')
 ['unive', 'sity']
 ```
+
 
 
 #### ３−２　セット型
@@ -238,6 +251,8 @@ set([' ', 'e', 'd', 'i', 'n', 's', 'r', 'u', 't', 'v', 'y'])
 {'r', 'd', 'y', 'i', 'v'}
 ```
 
+
+
 #### ３−３　タプル型
 
 辞書などの作成すると変更しないようなデータのために準備されています。タプルは(  )で囲んで作成します。
@@ -254,19 +269,21 @@ False
 京都の緯度は 35.02139 経度は 135.75556
 >>> list(kyoto) # 型の変換
 [35.02139, 135.75556]
+>>> yakusho_dic={'大阪':osaka,'京都':kyoto}
+{'大阪':(34.68639, 135.52), '京都': (35.02139, 135.75556)}
 ```
 
 
 
 #### ３−４ 練習
 
-１）近畿地区の国立大学の名称と緯度・経度を辞書形式で作成しなさい。
+１）近畿地区の国立大学の名称と緯度・経度の辞書を作成しなさい。
 
-| 名称             | 緯度      | 経度       |
-| ---------------- | --------- | ---------- |
-| 京都大学         | 35.026244 | 135.780822 |
-| 京都教育大学     | 34.950215 | 135.773187 |
-| 京都工芸繊維大学 | 35.049664 | 135.782046 |
+| Name                          | Latitude  | Longitude  |
+| :---------------------------- | --------- | ---------- |
+| Kyoto University              | 35.026244 | 135.780822 |
+| Kyoto University of Education | 34.950215 | 135.773187 |
+| Kyoto Institute of Technology | 35.049664 | 135.782046 |
 
 
 
@@ -276,7 +293,7 @@ False
 
 
 
- ### イテラブル・イテレーター
+ ### ４−１イテラブル・イテレーター
 
 
 
@@ -321,7 +338,7 @@ False
 
 
 
-#### 条件文　if
+#### ４−２　条件文　if〜else
 
 例えば解析用に作ったデータの中にいわゆる不可視ファイル（実際に存在はするのだけど画面上には表示されないシステムが使うファイル）があります。ところが、プログラムでデータを読み込むとファイルが全部読まれてしまいします。それを避けてファイルを読むには次のように処理します。
 
@@ -329,10 +346,10 @@ False
 >>> My_jpg_list=[]
 >>> My_list=os.listdir('Gaszou')
 >>> for filename in My_list:
->>>		if filename.endswith('.jpg')
->>>			My_jpg_list.append(filename)
->>>		elif 
->>>			print(filename+'is not a jpg file !')
+...		if filename.endswith('.jpg')
+...			My_jpg_list.append(filename)
+...		else 
+...			print(filename+'is not a jpg file !')
 >>> My_jpg_list
 ```
 
@@ -355,7 +372,7 @@ False
 
 
 
-#### 内包的表現
+#### ４−３　内包的表現
 
 繰り返しと条件文は数行のプログラムで書けるものですが、内包的表現を使うと１行で書くことができます。
 
@@ -373,15 +390,19 @@ False
 
 
 
-#### ジェネレーター
+#### ４−４　ジェネレーター
+
+一度に読み込むとパソコンのメモリがパンクしてしまうほど多くのデータがある場合、少しずつ読み込んで逐次処理するのが得策です。次の例は、１から1000までの数字を7つずつ取り出して、データを作るgeneratorの例です。
 
 ```python
-x=list(range(10000))
-def gen(x):
-	tmp=[]
-	for i in x:
-		tmp.append(i)
-		if len(tmp)%%1000==0:  #### ここが問題
-			yield tmp
+>>> def generator(input):
+...     tmp=[]
+...     for x in input:
+...         tmp.append(x)
+...         if x%7==0:  #### ７で割り切れたらその都度支出力
+...             yield tmp　　　#####  returnとの違い
+>>> input=list(range(1000))
+>>> mygen=generator(input)
+>>> next(mygen)
 ```
 
