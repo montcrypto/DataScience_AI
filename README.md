@@ -517,11 +517,43 @@ NumPy配列に組み込まれている統計量は以下の通りです。この
 
 ### ５−２　作図
 
-科学技術計算においてNumPyと同様に、グラフ表示に必要なMatplotlib ライブラリー ( https://matplotlib.org )は欠かせません。棒グラフ、折れ線グラフ、散布図はもとより、アニメーションや動画などの可視化ができます。覚えることも多いですが、パラメータの意味を習得することで、様々なグラフやデータを重ね合わせたり、合体させたりできるのも特徴です。
+科学技術計算においてNumPyと同様に、グラフ表示に必要なMatplotlib ライブラリー ( https://matplotlib.org )は欠かせません。棒グラフ、折れ線グラフ、散布図はもとより、アニメーションや動画などの可視化ができます。覚えることも多いですが、パラメータの意味を習得することで、様々なグラフやデータを重ね合わせたり、合体させたりできるのも特徴です。例としてxの範囲-3から3で$$y＝x^3$$ のグラフを描いてみます。
 
+```python
+>>> import numpy as np
+>>> x= np.arange(-3,3,0.1)
+>>> y=x**3
 
+>>> import matplotlib.pyplot as plt
+>>> %matplotlib inline
+>>> plt.plot(x,y,label="y=x^3")
+>>> plt.legend()
+>>> plt.xlabel('x')
+>>> plt.ylabel('y')
+>>> plt.show()
+```
+
+<img src="./img/yx3.png" alt="Alt text" style="zoom:60%;" />
+
+複数のグラフを作ることも容易ですが、文法が少し変わるので注意が必要です。y=xから1/3乗、1/2乗、1乗、2乗、3乗、5乗の6つ　を２行３列に書くには
+
+```python
+>>> fig, axes = plt.subplots(ncols=3,nrows=2, figsize=(12,8))
+>>> power=[1/3,1/2,1,2,3,5]
+>>> for i,p in enumerate(power):
+...     c,r=divmod(i,3)
+...     axes[c,r].plot(x,x**i,label="power of"+str(power[i]) )
+...     axes[c,r].legend()
+...     axes[c,r].set_xlabel('x')
+...     axes[c,r].set_ylabel('y')
+>>> plt.show()
+```
+
+<img src="/Users/sugiyama/Documents/GitHub/DataScience_AI/img/yxpowers.png" style="zoom:50%;" />
 
  ### ５−３　表計算
+
+
 
 
 
