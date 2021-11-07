@@ -399,11 +399,15 @@ pythonは、オブジェクト指向型の言語と言われます。さまざ�
 
 ### ５ー１　数値演算
 
-**NumPy** (https://numpy.org/) は数値計算を効率的に行うための拡張モジュールで、特に多次元配列（例えばベクトルや行列などを表現できる）を扱うことができ、その操作のための広範かつ高速で動作する**数学関数ライブラリー**を提供しています。　NumPy を使うには、まずnumpy を省略形npでプログラムに読み込むと、numpyに含まれているいるさまざまな関数や処理を`np.関数`という書式で呼び出すことができる。
+> NumPy is an open source project aiming to enable numerical computing with Python. It was created in 2005, building on the early work of the Numeric and Numarray libraries. NumPy will always be 100% open source software, free for all to use and released under the liberal terms of the [modified BSD license](https://github.com/numpy/numpy/blob/main/LICENSE.txt). (From HP)
+
+**NumPy** (https://numpy.org/) は数値計算を効率的に行うための**拡張モジュール**で、特に多次元配列（例えばベクトルや行列などを表現できる）を扱うことができ、その操作のための広範かつ高速で動作する**数学関数ライブラリー**を提供しています。　NumPy を使うには、まずnumpy を省略形npでプログラムに読み込むと、numpyに含まれているいるさまざまな関数や処理を`np.関数`という書式で呼び出すことができる。
+
+
 
 #### ５ー１ー１　多次元配列
 
-リストと配列の違いを理解しましょう。リストはイテラブルですが計算はできません。リストで作った配列を`np.array( )`に代入すると、個々の数値に対して同じ演算をすることができるようになります。またリストの中にリストがある入れ子の場合、`np.array( )`に渡すと、多次元の配列となります。下の例では５個の要素からなるリストを３倍の長さにして、それを３x５の行列に書き換えます。最後にそれを対数変換します。
+リストと配列の違いを理解しましょう。リストはイテラブルですが計算はできません。リストで作った配列を`np.array( )`に代入すると、個々の数値に対して同じ演算をすることができるようになります。またリストの中にリストがある入れ子の場合、`np.array( )`に渡すと、多次元の配列となります。下の例では５個の要素からなるリストを３倍の長さにして、それを３x５の行列に書き換えます。最後にそれを`np.log()`関数で対数変換します。
 
 ```python
 >>> import numpy as np
@@ -420,8 +424,6 @@ array([[1, 2, 3],
        [2, 3, 4],
        [5, 1, 2],
        [3, 4, 5]])
->>> x.max(axis=1)
-array([3, 5, 4, 5, 5])
 >>> 3*np.log(x)
 array([[0.        , 2.07944154, 3.29583687],
        [4.15888308, 4.82831374, 0.        ],
@@ -519,9 +521,9 @@ NumPy配列に組み込まれている統計量は以下の通りです。この
 
 ### ５−２　作図
 
-> Matplotlib is the brainchild of John Hunter (1968-2012), who, along with its many contributors, have put an immeasurable amount of time and effort into producing a piece of software utilized by thousands of scientists worldwide.>
+> Matplotlib is the brainchild of John Hunter (1968-2012), who, along with its many contributors, have put an immeasurable amount of time and effort into producing a piece of software utilized by thousands of scientists worldwide.　(From HP)
 
-科学技術計算においてNumPyと同様に、グラフ表示に必要なMatplotlib ライブラリー ( https://matplotlib.org )は欠かせません。棒グラフ、折れ線グラフ、散布図はもとより、アニメーションや動画などの可視化ができます。覚えることも多いですが、パラメータの意味を習得することで、様々なグラフやデータを重ね合わせたり、合体させたりできるのも特徴です。例としてxの範囲-3から3で$$y＝x^3$$ のグラフを描いてみます
+科学技術計算においてNumPyと同様に、グラフ表示に必要な**Matplotlib** ライブラリー ( https://matplotlib.org )は欠かせません。棒グラフ、折れ線グラフ、散布図はもとより、アニメーションや動画などの可視化ができます。覚えることも多いですが、パラメータの意味を習得することで、様々なグラフやデータを重ね合わせたり、合体させたりできるのも特徴です。例としてxの範囲-3から3の$$y＝x^3$$ 　のグラフを描いてみます。
 
 ```python
 >>> import numpy as np
@@ -553,11 +555,11 @@ NumPy配列に組み込まれている統計量は以下の通りです。この
 >>> plt.show()
 ```
 
-<img src="/Users/sugiyama/Documents/GitHub/DataScience_AI/img/yxpowers.png" style="zoom:50%;" />
+<img src="/Users/sugiyama/Documents/GitHub/DataScience_AI/img/yxpowers.png" style="zoom:30%;" />
 
  ### ５−３　表計算
 
-> When working with tabular data, such as data stored in spreadsheets or databases, pandas is the right tool for you. pandas will help you to explore, clean, and process your data. In pandas, a data table is called a [`DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame).
+> When working with tabular data, such as data stored in spreadsheets or databases, pandas is the right tool for you. pandas will help you to explore, clean, and process your data. In pandas, a data table is called a [`DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame). (From HP)
 
 Pandas (https://pandas.pydata.org/) ライブラリーはエクセルで扱うような表形式のデータを扱うツールとしてデザインされました。外部ソフトで作成したtext, csv, JSON, Excelなどはもちろん、配列を表形式DataFrame() に読み込むことで、用意された豊富な統計処理や表計算を実行できます。またこのライブラリーはmatplotlibと連携してグラフ表示機能も組み込まれています。
 
