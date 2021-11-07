@@ -523,7 +523,7 @@ NumPy配列に組み込まれている統計量は以下の通りです。この
 
 > Matplotlib is the brainchild of John Hunter (1968-2012), who, along with its many contributors, have put an immeasurable amount of time and effort into producing a piece of software utilized by thousands of scientists worldwide.　(From HP)
 
-科学技術計算においてNumPyと同様に、グラフ表示に必要な**Matplotlib** ライブラリー ( https://matplotlib.org )は欠かせません。棒グラフ、折れ線グラフ、散布図はもとより、アニメーションや動画などの可視化ができます。覚えることも多いですが、パラメータの意味を習得することで、様々なグラフやデータを重ね合わせたり、合体させたりできるのも特徴です。例としてxの範囲-3から3の$$y＝x^3$$ 　のグラフを描いてみます。
+科学技術計算においてNumPyと同様に、グラフ表示に必要な**Matplotlib** ライブラリー ( https://matplotlib.org )は欠かせません。棒グラフ、折れ線グラフ、散布図はもとより、アニメーションや動画などの可視化ができます。覚えることも多いですが、パラメータの意味を習得することで、様々なグラフやデータを重ね合わせたり、合体させたりできるのも特徴です。例としてxの範囲-3から3の $$y＝x^3$$ のグラフを描いてみます。
 
 ```python
 >>> import numpy as np
@@ -539,7 +539,7 @@ NumPy配列に組み込まれている統計量は以下の通りです。この
 >>> plt.show()
 ```
 
-<img src="./img/yx3.png" alt="Alt text" style="zoom:60%;" />
+<img src="./img/yx3.png" alt="Alt text" style="zoom:30%;" />
 
 複数のグラフを作ることも容易ですが、文法が少し変わるので注意が必要です。y=xから1/3乗、1/2乗、1乗、2乗、3乗、5乗の6つ　を２行３列に書くには
 
@@ -555,7 +555,7 @@ NumPy配列に組み込まれている統計量は以下の通りです。この
 >>> plt.show()
 ```
 
-<img src="/Users/sugiyama/Documents/GitHub/DataScience_AI/img/yxpowers.png" style="zoom:30%;" />
+<img src="./img/yxpowers.png" style="zoom:50%;" />
 
  ### ５−３　表計算
 
