@@ -2,33 +2,9 @@
 
 ## ６　地理情報データを扱う
 
-<br>
-
-GISについて少し触れてみようと思います。以下国土交通省国土地理院のHPからの引用です。
-
->　地理情報システム（**GIS：Geographic Information System**）は、地理的位置を手がかりに、**位置に関する情報を持ったデータ（空間データ）**を総合的に管理・加工し、視覚的に表示し、高度な分析や迅速な判断を可能にする技術である。
->　平成7年1月の阪神・淡路大震災の反省等をきっかけに、政府において、GISに関する本格的な取組が始まった。その中核となる取組が、国土空間データ基盤の整備である。
->　ハードウェア、ソフトウェアの低価格化が進み、簡易なGIS導入が可能になる一方で、地図データ等については、電子化されていない、データ仕様が異なり利用できない等の問題があり、GISを導入する主体が、各々整備する必要があり、社会的には二重、三重の投資となる等の問題があった。
->　このため、GISを高度に活用できる社会の実現のためには、地図情報の電子化のみならず、それを活用していく技術、制度、人材等が必要であり、これらの総体を社会的な基盤としてとらえ、その総合的、体系的な整備を図っていく必要性が認識され始めた。
->　このような背景のもと、平成19年５月には、地理空間情報の活用の推進に関する施策を総合的かつ計画的に推進することを目的として、**地理空間情報活用推進基本法**が、国会で制定された。
-
-<br>
-
-この章では、GISデータやそれに付随する統計量の扱い方について初歩的なところを学習します。
-
-<br>
-
-### ６ー１　データの取得
-
-<br>
-
-> GeoPandas is an open source project to make working with geospatial data in python easier. GeoPandas extends the datatypes used by [pandas](http://pandas.pydata.org/) to allow spatial operations on geometric types. Geometric operations are performed by [shapely](https://shapely.readthedocs.io/). Geopandas further depends on [fiona](https://fiona.readthedocs.io/) for file access and [matplotlib](http://matplotlib.org/) for plotting.
 
 
-
-日本地図に関してはGitHubにData of JapanというTeamが取りまとめた使いやすいJSONファイルがあるのでそれをダウンロードします。このデータは**geopanda**（https://geopandas.org/)（GIS用データをpandas形式に拡張したり、matplotlibで可視化できる）で処理します。
-
-
+### ６ー１　データの取得とpythonへの読み込み
 
 #### ６ー１　文化庁のホームページから指定文化財のデータベースをダウンロードしてグラフ上に表示する。
 
