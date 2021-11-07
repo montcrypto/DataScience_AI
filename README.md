@@ -561,9 +561,9 @@ NumPy配列に組み込まれている統計量は以下の通りです。この
 
 > When working with tabular data, such as data stored in spreadsheets or databases, pandas is the right tool for you. pandas will help you to explore, clean, and process your data. In pandas, a data table is called a [`DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame). (From HP)
 
-Pandas (https://pandas.pydata.org/) ライブラリーはエクセルで扱うような表形式のデータを扱うツールとしてデザインされました。外部ソフトで作成したtext, csv, JSON, Excelなどはもちろん、配列を表形式DataFrame() に読み込むことで、用意された豊富な統計処理や表計算を実行できます。またこのライブラリーはmatplotlibと連携してグラフ表示機能も組み込まれています。
+Pandas (https://pandas.pydata.org/) ライブラリーはエクセルで扱うような表形式のデータを扱うツールです。外部ソフトで作成したtext, csv, JSON, Excelなどはもちろん、配列を表形式DataFrame() に読み込むことで、用意された豊富な統計処理や表計算を実行できます。またこのライブラリーにはmatplotlibと連携したグラフ表示機能も組み込まれています。
 
-
+３ー４で作成したdictデータをpandasに読み込んでみましょう。
 
 
 
