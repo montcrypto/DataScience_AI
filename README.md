@@ -31,6 +31,8 @@ Materials for lecture 2021 MU
 
 ### １ー１　標準python
 
+
+
 理科系ではMatLabやRなどを使用したことがあるかもしれませんし、JavaやCの言語を使える方もいるでしょう。Pythonはそれに比べて、汎用性の高いライブラリーが多く開発され、科学分析において多くの人が使うようになりました。科学計算に必要なライブラリーが備わってきたこと、さらには読みやすく、書きやすく設計された言語であることが人気の一つと言われます。また、Githubなどの共同開発のサイトなどの活用により、コードが何度も読まれ、改訂されるたびに、さらに分かりやすくなるといわれます。なぜpythonかといえば、そういうコミュニティーがあり、常に良い言語を話そうとする人たちが、有益な情報をネットに上げてくれているということも上げておくべきでしょう。
 
 とは言え、言語ですからある程度覚えないと話せません。しかし、苦しい時期はおそらく思っているより短いと思います。
@@ -51,6 +53,8 @@ numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow,
 
 ### １ー２　クラウドサービスの利用
 
+
+
 Colaboratory（略称: Colab）は、ブラウザから Python を記述、実行できるサービスです。Googleの提供するサービスなので利用する人はGoogleアカウントを取得してください。計算時間とか、ファイルの保存期間とかに制限がありますが、お試しには夢のようなサービスです。
 
 https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU_qrC0
@@ -65,6 +69,8 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 
 ### ２ー１　Pythonで扱うデータ
 
+
+
 取り扱うデータ型は以下の通りです。
 + ブール値（Boolean)：TrueとかFalseという値
 + 整数（integer):小数点以下がない数
@@ -74,6 +80,8 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 
 
 ### ２ー２　演算子
+
+
 
 四則演算で必須なものは次の通りです。
 + `+`：加算
@@ -88,6 +96,8 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 
 ### ２ー３　比較演算子
 
+
+
 主な比較演算子は次の通りです。
 
 + `a < b`：a は b より小さい
@@ -99,7 +109,7 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 
 
 
-### ２ー４　練習
+上の演算子を使って割り算の関数を作ります。入力は2つ （x と y)　商と余りを返すことします。
 
 ```python
 >>> a=5.0  # .0 をつけて浮動小数点数と定義する
@@ -117,7 +127,14 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 ...
 >>> s,a = warizan(34,6)
 >>> print('sho',  s, ' amari ', a)
+6.0, 4.0
 ```
+
+
+
+### ２ー４　練習
+
+
 
 １）9時00分00秒から3333秒後は、何時何分何秒ですか？
 
@@ -126,6 +143,8 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 
 
 ## ３　データの型
+
+
 
 電卓の時は、１つの入力に対して1つの出力があった。ここで取り上げるデータは複数あるいはもっと多元的な複雑なデータである。まずは一次元の要素の並びを考える。
 
@@ -145,6 +164,8 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 
 ### ３ー１　リスト型
 
+
+
 リストは０個以上の要素をカンマで区切り角かっこ`[　]`で囲んだものです。リストの中の要素は、先頭から順番に指定して取り出すこと、範囲を決めて複数取り出すこと、など色々設定可能です。
 
 ```python
@@ -160,6 +181,8 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 ['history', 'biology', 'chemistry', 'physics']
 ```
 
+
+
 `list( )`関数は他のデータ型をリストに変換します。例えば、文字列の場合
 
 ```python
@@ -173,6 +196,8 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 
 
 ### ３ー２　セット型
+
+
 
 ちょっと複雑になりますが、この機能を使ってリストの中の要素を取り出すことができます。それにはリストを`set( )`関数に入れるか、リストを`{  }`で囲みます。データが書き込まれるメモリの位置によて順番が変わるので、いつも同じ順番とは限らないので、順番を気にするときは注意が必要です。
 
@@ -190,6 +215,8 @@ set([' ', 'e', 'd', 'i', 'n', 's', 'r', 'u', 't', 'v', 'y'])
 >>> wordset
 >>> {'n', 'd', 'r', 'e', 'u', 's', ' ', 't', 'y', 'i', 'v'}
 ```
+
+
 セット型のデータは集合演算につかいます。
 
 + `|`：和集合（ユニオン）
@@ -215,6 +242,8 @@ set([' ', 'e', 'd', 'i', 'n', 's', 'r', 'u', 't', 'v', 'y'])
 
 ### ３ー３　タプル型
 
+
+
 辞書などの作成すると変更しないようなデータのために準備されています。タプルは`(  )`で囲んで作成します。
  例えば京都の地理的位置や、学生の科目別成績など、**複数の要素から構成される独立したデータ**をあらわすときはタプルを使用します。タプルは`[ ] `で引数を入れることで個別に取り出すことができます。またタプルはリスト型に直すことで値の変更が可能です。
 
@@ -236,6 +265,8 @@ False
 
 
 ### ３ー４	練習
+
+
 
 １）近畿地区の国立大学の名称と緯度・経度の辞書を作成しなさい。
 
@@ -271,6 +302,8 @@ False
 ['Music','Pictures', 'Applications',　'Desktop', 'Documents']
 ```
 
+
+
 上に示したコードの `os.listdir()` は 今自分が利用しているディレクトリをリスト型で出力してます。デスクトップの一つ下の階層です。 list形式のデータはイテラブルなので、その要素を順番に取り出すことができ、繰り返し処理につかえます。例として、ディレクトリの中にいくつファイルがあるか順番に出力してみます。
 
 ```python
@@ -285,6 +318,8 @@ False
 ディレクトリDocumentsのファイル数は8
 ```
 
+
+
 上の簡単な `for ~ in` の簡単なループは、My_dirsの中のリストからひとつづつディレクトリー名をmy_dirに呼び出し、各ディレクトリにあるファイル数を出力するという意味になります。
 
 上はリスト型データの例ですが、数字の場合も`range()`という便利なイテレーターが準備されています。
@@ -295,6 +330,8 @@ False
 >>> list(range(1,10,3)
 [1, 4, 7]
 ```
+
+
 
 もう少し複雑な繰り返し分を考えてみます。例えば複数のリストがあり、それらから同時に一つずつ取り出すことを考えます。複数のリストから一つづつまとめて取り出す`zip( )` , 取り出した順に序数をつける`enumerate ( )`を使います。
 
@@ -311,6 +348,8 @@ False
 
 ### ４ー２　条件文　if〜else
 
+
+
 例えば解析用に作ったデータの中にいわゆる不可視ファイル（実際に存在はするのだけど画面上には表示されないシステムが使うファイル）があります。ところが、プログラムでデータを読み込むとファイルが全部読まれてしまいします。それを避けてファイルを読むには次のように処理します。
 
 ```python
@@ -324,9 +363,9 @@ False
 >>> My_jpg_list
 ```
 
-上の例では、Gazouのファイルにあるファイルのうち、拡張子が.jpgでないものを無視してjpegファイルのみのリストをMy_jpg_listに格納します。
 
-複数の用件を同時に満足する、あるいはどちらかを満足するという条件が必要な場合は、`and` あるいは`or` で複数の条件を併記します。
+
+上の例では、Gazouのファイルにあるファイルのうち、拡張子が.jpgでないものを無視してjpegファイルのみのリストをMy_jpg_listに格納します。複数の用件を同時に満足する、あるいはどちらかを満足するという条件が必要な場合は、`and` あるいは`or` で複数の条件を併記します。
 
 ```python
 >>> testdata=[1,2,3,4,5,6,7,8,9,0]
@@ -345,6 +384,8 @@ False
 
 ### ４ー３　内包表記
 
+
+
 繰り返しと条件文は数行のプログラムで書けるものですが、内包的表現を使うと１行で書くことができます。
 
 例えば ある特定のディレクトリの中から特定の拡張子のファイルだけを読み出したい場合、そのリストを作るには次のようにします。
@@ -352,6 +393,8 @@ False
 ```python
 [fl for fl in os.listdir('my_target_dir') if fl.endswith('.xlsx')]  ＃　例えばエクセルのファイル
 ```
+
+
 
 また、不可視ファイルを除いたリストが欲しい場合（MacOSの場合は .filenameの形式で最初にドットがつきます）には次のようにします。
 
@@ -362,6 +405,8 @@ False
 
 
 ### ４ー４　ジェネレーター
+
+
 
 これまで説明したイテレータは一度に全てのデータをメモリに読み込んでしまいます。パソコンのディレクトリの場合は問題なくても、たとえば何千枚もの画像を読み込もうとするとメモリはパンクしてしまいます。ジェネレーターは、そのような大きなイテラブルなオブジェクトに対して、指定した大きさで逐次読み出しをするための仕組みです。画像を扱う深層学習では普通に使うツールですので理解しておきましょう。次の例は、1から100の範囲、増分３の等差数列から7で割り切れる数字を順に出力する例です。２−４の関数では`return`で戻り値を得たのに対して、ここではyield であることに注意です。
 
@@ -389,23 +434,27 @@ False
 
 ## ５　汎用モジュールとライブラリー
 
-pythonは、オブジェクト指向型の言語と言われます。さまざまな目的を達成するために必要なひとつひとつの要素を**オブジェクト**といいます。
-
-一番上位にある目的のために特別な関数や値をまとめたもの**モジュール**、その一つ下の括りを**ライブラリー**と呼んでいます。
 
 
+pythonは、オブジェクト指向型の言語と言われます。さまざまな目的を達成するために必要なひとつひとつの要素を**オブジェクト**といいます。一番上位にある目的のために特別な関数や値をまとめたもの**モジュール**、その一つ下の括りを**ライブラリー**と呼んでいます。
 
 
 
 ### ５ー１　数値演算
 
+
+
 > NumPy is an open source project aiming to enable numerical computing with Python. It was created in 2005, building on the early work of the Numeric and Numarray libraries. NumPy will always be 100% open source software, free for all to use and released under the liberal terms of the [modified BSD license](https://github.com/numpy/numpy/blob/main/LICENSE.txt). (From HP)
+
+
 
 **NumPy** (https://numpy.org/) は数値計算を効率的に行うための**拡張モジュール**で、特に多次元配列（例えばベクトルや行列などを表現できる）を扱うことができ、その操作のための広範かつ高速で動作する**数学関数ライブラリー**を提供しています。　NumPy を使うには、まずnumpy を省略形npでプログラムに読み込むと、numpyに含まれているいるさまざまな関数や処理を`np.関数`という書式で呼び出すことができる。
 
 
 
 #### ５ー１ー１　多次元配列
+
+
 
 リストと配列の違いを理解しましょう。リストはイテラブルですが計算はできません。リストで作った配列を`np.array( )`に代入すると、個々の数値に対して同じ演算をすることができるようになります。またリストの中にリストがある入れ子の場合、`np.array( )`に渡すと、多次元の配列となります。下の例では５個の要素からなるリストを３倍の長さにして、それを３x５の行列に書き換えます。最後にそれを`np.log()`関数で対数変換します。
 
@@ -433,6 +482,8 @@ array([[0.        , 2.07944154, 3.29583687],
 >>> x=3*np.log(x)
 ```
 
+
+
 配列要素の情報を知る関数は次のとおりです。
 
 | 属性      | 意味                                          |
@@ -443,6 +494,8 @@ array([[0.        , 2.07944154, 3.29583687],
 | `a.size`  | 配列 `a` の要素数（`a.shape` の総乗と等しい） |
 | `a.flat`  | 配列 `a` の1次元表現（`a.ravel()` と等しい）  |
 | `a.T`     | 配列 `a` を転置した配列（`a` と要素を共有）   |
+
+
 
 上で作ったxでどのように出力されるか確認しましょう。
 
@@ -463,6 +516,8 @@ float64
 
 #### ５ー１ー２　配列を作る関数
 
+
+
 以下の関数で等差数列をはじめとしてn次元の様々な数列を作ることをができます。
 
 | 関数                          | 説明                                                         |
@@ -478,9 +533,9 @@ float64
 
 #### ５ー１ー３　配列のインデックス、スライスによるアクセス
 
-次の例では、5x5の乱数からなる２次元配列を作ります。個々の値は行と列に対応するインデックスを持っていて、その値を取り出したり、加工したりすることが可能です。たとえば、配列matのp行、q列の値は、`mat[p,q]`です。
 
-また、複数の行や列を取り出してスライス配列として扱うことができます。例えば、行はp、列はqの前後合わせた３つのスライス配列は`mat[p, q-1:q+1] `で与えられます。
+
+次の例では、5x5の乱数からなる２次元配列を作ります。個々の値は行と列に対応するインデックスを持っていて、その値を取り出したり、加工したりすることが可能です。たとえば、配列matのp行、q列の値は、`mat[p,q]`です。また、複数の行や列を取り出してスライス配列として扱うことができます。例えば、行はp、列はqの前後合わせた３つのスライス配列は`mat[p, q-1:q+1] `で与えられます。
 
 ```python
 >>> mat=np.random.rand(5,5)
@@ -500,11 +555,13 @@ array([[0.93987159, 0.755175  , 0.25051673, 0.91663363, 0.6494    ],
        [0.09517721, 0.43037945, 0.        , 0.        , 0.33087475],
        [0.17262683, 0.51725863, 0.83124545, 0.70180956, 0.35399325],
        [0.30247671, 0.52517184, 0.92602194, 0.01585037, 0.26942446]])
-
-
 ```
 
+
+
 #### ５ー１ー４　配列の統計量
+
+
 
 NumPy配列に組み込まれている統計量は以下の通りです。この関するの( )内に軸を設定することで、行あるいは列でそれぞれの統計量を計算することができます。たとえば、上のmatの例で縦方向の行で集計する場合は`a.sum(axis=0)`横方向の列で集計する場合は、`a.sum(axis=1)` となります。
 
@@ -519,9 +576,13 @@ NumPy配列に組み込まれている統計量は以下の通りです。この
 
 
 
-### ５−２　作図
+### ５ー２　作図
+
+
 
 > Matplotlib is the brainchild of John Hunter (1968-2012), who, along with its many contributors, have put an immeasurable amount of time and effort into producing a piece of software utilized by thousands of scientists worldwide.　(From HP)
+
+
 
 科学技術計算においてNumPyと同様に、グラフ表示に必要な**Matplotlib** ライブラリー ( https://matplotlib.org )は欠かせません。棒グラフ、折れ線グラフ、散布図はもとより、アニメーションや動画などの可視化ができます。覚えることも多いですが、パラメータの意味を習得することで、様々なグラフやデータを重ね合わせたり、合体させたりできるのも特徴です。例としてxの範囲-3から3の $$y＝x^3$$ のグラフを描いてみます。
 
@@ -541,6 +602,8 @@ NumPy配列に組み込まれている統計量は以下の通りです。この
 
 <img src="./img/yx3.png" alt="Alt text" style="zoom:30%;" />
 
+
+
 複数のグラフを作ることも容易ですが、文法が少し変わるので注意が必要です。y=xから1/3乗、1/2乗、1乗、2乗、3乗、5乗の6つ　を２行３列に書くには
 
 ```python
@@ -557,13 +620,80 @@ NumPy配列に組み込まれている統計量は以下の通りです。この
 
 <img src="./img/yxpowers.png" style="zoom:50%;" />
 
- ### ５−３　表計算
+
+
+ ### ５ー３　表計算
+
+
 
 > When working with tabular data, such as data stored in spreadsheets or databases, pandas is the right tool for you. pandas will help you to explore, clean, and process your data. In pandas, a data table is called a [`DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame). (From HP)
 
+
+
 Pandas (https://pandas.pydata.org/) ライブラリーはエクセルで扱うような表形式のデータを扱うツールです。外部ソフトで作成したtext, csv, JSON, Excelなどはもちろん、配列を表形式DataFrame() に読み込むことで、用意された豊富な統計処理や表計算を実行できます。またこのライブラリーにはmatplotlibと連携したグラフ表示機能も組み込まれています。
 
-３ー４で作成したdictデータをpandasに読み込んでみましょう。
+
+
+３ー４で作成したdictデータをpandasに読み込んでみましょう。さらに、住所、各大学の学生数、創立年の情報を加えて表にします。
+
+```python
+>>> univ_dic={'Kyoto University':(35.026244,135.780822),'Kyoto University of Education':(34.950215,135.773187),'Kyoto Institute of Technology':(35.049664,135.782046)}
+>>>
+>>> import pandas as pd
+>>> df=pd.DataFrame(univ_dic, index=('latitude','longitude'))
+>>> dfn=df.T
+>>> dfn['address']=['京都府京都市左京区吉田本町','京都府京都市伏見区深草藤森町1','京都府京都市左京区松ヶ崎橋上町1']
+>>> dfn['students']=['12,958','1,332','2,656']
+>>> dfn['teachers']=['3,441','110','281']
+>>> dfn
+```
+
+| University                    |  Latitude |  longitude |                         Address | Students | Teachers |
+| :---------------------------- | --------: | ---------: | ------------------------------: | -------: | -------- |
+| Kyoto University              | 35.026244 | 135.780822 |      京都府京都市左京区吉田本町 |   12,958 | 3,441    |
+| Kyoto University of Education | 34.950215 | 135.773187 |   京都府京都市伏見区深草藤森町1 |    1,332 | 110      |
+| Kyoto Institute of Technology | 35.049664 | 135.782046 | 京都府京都市左京区松ヶ崎橋上町1 |    2,656 | 281      |
+
+
+
+最後に作成したdfn からデータを読み込んで緯度経度の値から地理的な関係と、学生と教員の関係を示す散布図を表示します。最初のグラフではプロットの大きさに学生の人数が反映されるようにします。また二つ目にはプロットの凡例をつけています。
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+fig, ax=plt.subplots(ncols=2,figsize=(10,5))
+
+for i, u in enumerate(dfn.index):
+    dfn['students'].values[i]
+    ax[0].scatter(dfn['longitude'][i],dfn['latitude'][i],s=dfn['students'].values[i],label=u)
+    ax[0].set_ylabel('latitude')
+    ax[0].set_xlabel('longitude')
+    ax[1].scatter(dfn['students'][i],dfn['teachers'][i],s=100,label=u)
+    ax[1].set_ylabel('students')
+    ax[1].set_xlabel('teachers')
+    ax[1].legend()
+plt.show()
+```
+
+<img src="./img/u_in_kyoto.png" style="zoom:50%;" />
+
+
+
+### ５ー４　練習
+
+１）　0,0,1,0,0,1.... を繰り返す総数250個の1次元の数列をつくり、それを16*16の２次元数列に変換しなさい。
+
+２）　作成した配列をmatplotlibの`imshow()`を使って表示しなさい。
+
+３）　４ー１の例で扱った関西地域の県名、県庁所在地、県の木のデータに合わせて、県の花を加えて表にしなさい。
+
+
+
+## ６　地理情報データを扱う
+
+
+
+### ６ー１　データの取得とpythonへの読み込み
 
 
 
