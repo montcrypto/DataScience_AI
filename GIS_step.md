@@ -18,7 +18,7 @@ GISについて少し触れてみようと思います。以下国土交通省�
 
 <br>
 
-### ６ー１　データの取得
+### ６ー１　データの取得と表示
 
 <br>
 
@@ -44,7 +44,8 @@ import os
 import matplotlib.pyplot as plt
 import pandas as pd
 
-df_temple = pd.read_csv('../../GitHubData/DataScience_AI/data/GIS/Kyoto_Architecture.csv',usecols = [2, 5, 8, 16, 17],\
+df_temple = pd.read_csv('../../GitHubData/DataScience_AI/data/GIS/Kyoto_Architecture.csv',\
+                        usecols = [2, 5, 8, 16, 17],\
                         dtype  = {'名称': str, '種別1': str, '時代': str, '緯度': float, '経度': float})
 df_temple = df_temple.rename(columns = {'名称': 'article', '種別1': 'category',\
                                         '時代': 'period', '緯度': 'latitude','経度': 'longitude'})
@@ -54,9 +55,11 @@ plt.axis('square')
 plt.show()
 ```
 
+<img src="./img/nt_kyoto_s.png" style="zoom:50%;" />
+
 <br>
 
-#### ６－1ー２　地図上に所在地表示
+#### ６－1ー２　地図上への文化財所在地の表示
 
 <br>
 
@@ -84,6 +87,8 @@ for i in range(2):
 plt.show()
 ```
 
+![](./img/nt_kyoto_on_map.png)
+
 <br>
 
 この図に交通網を重ね合わせて、プロットを観光客動員数で表し、月毎に分析すれば、人の流れを予測しながら交通の運行計画もできそうですね。
@@ -92,9 +97,20 @@ plt.show()
 
 
 
-#### ６ー３　都道府県の地図を描く
+#### ６ー１ー３　e-statのデータの利用
 
-- 「e-stat 統計で見る日本」より、国税調査、小区分、境界データを47都道府県分ダウンロードして、その内Shapeファイルをgeopandaで読み込んで作図する。
+<br>
+
+> **ｅ－Ｓｔａｔ**とは日本の政府統計に関する情報のワンストップサービスを実現することを目指した政府統計ポータルサイトです。これまで各府省等が独自に運用するＷｅｂサイトに散在していた統計関係情報を本サイトに集約、社会の情報基盤たる統計結果を誰でも利用しやすいかたちで提供することを目指し、各府省等が登録した統計表ファイル、統計データ、公表予定、新着情報、調査票項目情報、統計分類等の各種統計関係情報を提供していきます。(https://www.e-stat.go.jp/help)
+
+<br>
+
+次に「e-stat 統計で見る日本」より、国税調査、小区分、境界データを47都道府県分ダウンロードします。トップページ (https://www.e-stat.go.jp/) から、”地図で見る統計（統計GIS)”、”境界データダウンロード”に移動して”国勢調査”、“2015年"、”小地域（町丁・字等別）（JGD2000）”
+
+ [地図で見る統計(統計GIS)](https://www.e-stat.go.jp/gis)　 [地図で見る統計(統計GIS)](https://www.e-stat.go.jp/gis)　の順に
+
+
+その中のShapeファイルをgeopandaで読み込んで作図します。Shape ファイルの中には位置情報以外にも様々なデータが含まれてます。
 
 ```python
 %matplotlib inline
