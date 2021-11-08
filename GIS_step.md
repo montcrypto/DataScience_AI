@@ -24,18 +24,19 @@ GISについて少し触れてみようと思います。以下国土交通省�
 
 > GeoPandas is an open source project to make working with geospatial data in python easier. GeoPandas extends the datatypes used by [pandas](http://pandas.pydata.org/) to allow spatial operations on geometric types. Geometric operations are performed by [shapely](https://shapely.readthedocs.io/). Geopandas further depends on [fiona](https://fiona.readthedocs.io/) for file access and [matplotlib](http://matplotlib.org/) for plotting.
 
-
+<br>
 
 日本地図に関してはGitHubにData of JapanというTeamが取りまとめた使いやすいJSONファイルがあるのでそれをダウンロードします。このデータは**geopanda**（https://geopandas.org/)（GIS用データをpandas形式に拡張したり、matplotlibで可視化できる）で処理します。
 
+<br>
 
+#### ６ー１ー１　文化庁の指定文化財
 
-#### ６ー１　文化庁のホームページから指定文化財のデータベースをダウンロードしてグラフ上に表示する。
+<br>
 
-- 例として京都府の建造物指定文化財：Kyoto_Architecture.csv：
-- 日本地図はhttps://github.com/dataofjapan/land からJSONファイルを取得。
+文化庁は国指定文化財等データベース（https://kunishitei.bunka.go.jp/bsys/index）を公開しています。「国宝・重要文化財（建造物）」を開いて「都道府県別にみる」から「京都府」を選択すると305件の物件がでてきます。それらをcsv出力してデータとします（Kyoto_Architecture.csv）。まず、csvファイルをpandasのDataFrameとして読み込みますが、名称、国宝か重要文化財か、時代、緯度、経度の５項目のみを読み込みます。最後に各建造物の緯度と経度のデータをつかって横軸緯度、縦軸経度のグラフ上に散布図をつくります。
 
-
+<br>
 
 ```python
 import os
@@ -53,10 +54,13 @@ plt.axis('square')
 plt.show()
 ```
 
-#### ６－２　地図上に文化財所在地をプロットする
+<br>
 
-- 日本地図府県境界データをgeopandasに読み込み、京都府のみを描画する。
-- そこに、文化財のデータを重ねて表示する。その際に国宝指定を赤、重要文化財指定を灰色とする。
+#### ６－1ー２　地図上に所在地表示
+
+<br>
+
+日本地図府県境界データを使って、京都府を描画し、その上に重ねて文化財の所在地を表示します。その際に国宝指定を赤、重要文化財指定を灰色とします。府県境界データはGitHub上に、Data of Japanさん (https://github.com/dataofjapan/land) が公開しているjapan.geojsonというファイルをGeoPandaに読み込んで作成します。京都には305件の指定文化財がありますが、多くは京都市に集中していますので、京都府全体の図と京都市近傍に拡大した２つの図を作成します。
 
 ```python
 import geopandas as gpd
@@ -74,10 +78,19 @@ fig, ax = plt.subplots(nrows=1,ncols=2,figsize = (16,16))
 for i in range(2):
     if i == 1:
         ax[i].set_xlim([135.6,135.9]);ax[i].set_ylim([34.8,35.1])
-    df_jap[df_jap['nam_ja'] == '京都府'].plot(ax=ax[i],figsize=(8,8), edgecolor='#444', facecolor='white', linewidth = 0.5)
+    df_jap[df_jap['nam_ja'] == '京都府'].plot(ax=ax[i],figsize=(8,8), \
+                           edgecolor='#444', facecolor='white', linewidth = 0.5)
     ax[i].scatter(df_temple.longitude,df_temple.latitude,color=colors)
 plt.show()
 ```
+
+<br>
+
+この図に交通網を重ね合わせて、プロットを観光客動員数で表し、月毎に分析すれば、人の流れを予測しながら交通の運行計画もできそうですね。
+
+<br>
+
+
 
 #### ６ー３　都道府県の地図を描く
 
