@@ -63,7 +63,7 @@ plt.show()
 
 <br>
 
-日本地図府県境界データを使って、京都府を描画し、その上に重ねて文化財の所在地を表示します。その際に国宝指定を赤、重要文化財指定を灰色とします。府県境界データはGitHub上に、Data of Japanさん (https://github.com/dataofjapan/land) が公開している**japan.geojson**というファイルを**GeoPanda**に読み込んで作成します。京都には305件の指定文化財があり、その多くは京都市に集中していますので、京都府全体の図と京都市近傍に拡大した２つの図を作成します。
+日本地図府県境界データを使って、京都府を描画し、その上に重ねて文化財の所在地を表示します。その際に国宝指定を赤、重要文化財指定を灰色とします。府県境界データはGitHub上に、Data of Japanさん ( https://github.com/dataofjapan/land  )  が公開しているjapan.geojsonというファイルを**GeoPanda**に読み込んで作成します。京都には305件の指定文化財があり、その多くは京都市に集中していますので、京都府全体の図と京都市近傍に拡大した２つの図を作成します。
 
 ```python
 import geopandas as gpd
@@ -107,9 +107,23 @@ plt.show()
 
 次に「e-stat 統計で見る日本」より、国税調査、小区分、境界データを47都道府県分ダウンロードします。トップページ (https://www.e-stat.go.jp/) から、 地図で見る統計（統計GIS) / 境界データダウンロード / 国勢調査 / 2015年 / 小地域（町丁・字等別）（JGD2000）/ 世界測地系緯度経度・Shapefile  / と選択すると、都道府県別に2018-05-18公開のデータが表示されます。例として01 北海道 を選択すると、北海道全域から、小区分にいたる世界測地系緯度経度・Shapefileに至ります。ここから01000 北海道全域をダウンロードします。
 
-ダウンロードした**A002005212012D...**というディレクトリには、**h27ka01**(おそらく平成27年で01は北海道のID)ではじまるう４つのファイルがあり、その中の**.shp**というのがこれから利用するShapfileファイルです。次に、Shapefileの中には位置情報以外にも面積、境界長、人口、世帯数などの多くのデータが含まれてます。
+ダウンロードした*A002005212012D...*というディレクトリには、*h27ka01*(おそらく平成27年で01は北海道のID)ではじまるう4つのファイルがあり、その中の**.shp**というのがこれから利用するShapfileファイルです。次に、Shapefileの中には位置情報以外にも面積、境界長、人口、世帯数などの多くのデータが含まれてます。
 
-次の例で、宮崎県のデータを取得して作図します。
+<br>
+
+少し時間がかかりますが、日本全国どこでも地図が表示できるように国税調査、小区分、境界データを47都道府県分ダウンロードしてみました。それを、e-stat_Kokuzei_Shpというディレクトリーに保存します。
+
+そのディレクトリから各県に相当するshpファイルのpathをリストにします。
+
+```　　python
+import glob
+data_dir='../../GitHubData/DataScience_AI/data/GIS/e-Stat_Kokuzei_Shp' #
+prefecture_shp=sorted(glob.glob(data_dir+'/*/*.shp'))
+```
+
+<br>
+
+宮崎県のデータを取り出してみましょう。japan.jsonのデータから宮崎県の県番号を取得して、その番号に対応するshpファイルを読み込み、それをgeopandasに渡して、図示します。
 
 ```python
 %matplotlib inline
@@ -127,24 +141,37 @@ ax.set_axis_off()
 plt.show()
 ```
 
-#### ６ー４　階級区分図（かいきゅうくぶんず、choropleth map）を人口密度と家族構成で作成する
+<img src="./img/miyazaki.png" style="zoom:70%;" />
+
+
+
+<b>
+
+#### ６ー1ー４階級区分図（かいきゅうくぶんず、choropleth map）
+
+<br>
+
+> A choropleth map is a thematic map in which areas are shaded or patterned in proportion to the measurement of the statistical variable being displayed on the map, such as population density or per-capita income. The choropleth map provides an easy way to visualize how a measurement varies across a geographic area or it shows the level of variability within a region. A special type of choropleth map is a prism map, a three-dimensional map in which a given region's height on the map is proportional to the statistical variable's value for that region. (from web)
+
+<br>
+
+読み込んだshpデータには、36項目、2600区分（地域を市町村より下の区分で分けた単位、何丁目とか）の情報が含まれており、項目には、郵便番号、市町村名、以下の住所、人口、世帯数、区画を代表する緯度経度、境界データなどが記載されています。それらのうち面積、人口、世帯数を使い、人口密度と一世帯あたりの人数を新たにデータベースに加えて地図上に表示します。こういう作図を階級区分図といいます。地域による人口集中度や核家族化など、すでによく知られるところですが、実際のデータを利用して確認します。
 
 ```python
 gdf['DENSITY']= gdf['JINKO']/gdf['AREA']*10**6 # 1平方キロメートルあたりの人口
-#print(gdf.head())
-
-fig, ax = plt.subplots(figsize = (24,16))
-gdf.plot(column = 'DENSITY', edgecolor = "black",scheme='quantiles', linewidth=0.2, cmap='YlOrRd', ax=ax, legend = True)
-ax.set_axis_off()
-plt.show()
-
-gdf['FAMILY']= gdf['JINKO']/gdf['SETAI']# 1世帯あたりの人数
-#print(gdf.info())
-#print(gdf.head())
+gdf['FAMILY']= gdf['JINKO']/gdf['SETAI']# 1世帯あたりの人数#print(gdf.head())
  
-fig, ax = plt.subplots(figsize = (24,16))
-gdf.plot(column = 'FAMILY', edgecolor = "black",scheme='quantiles', linewidth=0.2, cmap='YlOrRd', ax=ax, legend = True)
-ax.set_axis_off()
+fig, ax = plt.subplots(ncols=2,figsize = (16,16))
+for i, title in enumerate(['DENSITY','FAMILY']):
+    gdf.plot(column = title, edgecolor = "black",scheme='quantiles', \
+             linewidth=0.2, cmap='YlOrRd', ax=ax[i], legend = True)
+    ax[i].set_axis_off()
 plt.show()
 ```
+
+<img src="./img/choropleth.png" style="zoom:80%;" />
+
+<br>
+
+
 
