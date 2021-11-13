@@ -14,11 +14,19 @@ GISについて少し触れてみようと思います。以下国土交通省�
 
 <br>
 
-この章では、GISデータやそれに付随する統計量の扱い方について初歩的なところを学習します。
+この章では、**GISデータ**やそれに付随する統計量の扱い方について初歩的なところを学習します。データの形式にはベクター型とラスター型との２種類があり、それぞれデータに表記されています。
+
+**ベクター型**のデータとは、複数の地理上の点の位置とそれを繋いだ線、軌跡、区画などを数値データとして記録して再現する形式です。数値で管理しているので、描いたグラフィック自体はデータ量も小さく、拡大縮小もスムーズです。例えば河川や道路、区画をなどさまざまな表現に使われます。
+
+一方**ラスター型**は、ある特定の区画（１００メートル四方とか1km四方等）のメッシュを設けて地理的な区域を分割し、その区画内における情報を数値として表現する形式です。区画をピクセルに例えれば、格子状（グリッド状）に並んだピクセルで構成されるデータと言えます。まさに、濃淡のある画像として表現されるデータです。この場合解像度は設定された区画の大きさから変わることはありません。
+
+ここではpythonによる初歩的な使い方をまとめますが、GISデータの取り扱いに関しては、QGIS(https://qgis.org/ja/site/forusers/download.html) という便利なアプリケーションがフリーで公開されていいます。
+
+
 
 <br>
 
-### ６ー１　データの取得と表示
+### ６ー１　データの構造とその表示
 
 <br>
 
@@ -26,7 +34,7 @@ GISについて少し触れてみようと思います。以下国土交通省�
 
 <br>
 
-日本地図に関してはGitHubにData of JapanというTeamが取りまとめた使いやすいJSONファイルがあるのでそれをダウンロードします。このデータは**geopanda**（https://geopandas.org/)（GIS用データをpandas形式に拡張したり、matplotlibで可視化できる）で処理します。
+ここでは**geopanda**（https://geopandas.org/)（GIS用データをpandas形式に拡張したり、matplotlibで可視化できる）で処理します。
 
 <br>
 
@@ -34,7 +42,7 @@ GISについて少し触れてみようと思います。以下国土交通省�
 
 <br>
 
-文化庁は国指定文化財等データベース（https://kunishitei.bunka.go.jp/bsys/index） を公開しています。「国宝・重要文化財（建造物）」を開いて「都道府県別にみる」から「京都府」を選択すると一覧がでてきますので、それらを**csv**出力してデータとします（Kyoto_Architecture.csv）。まず、**csv**ファイルを**pandas**の`DataFrame( )`として読み込みますが、その際、名称、国宝か重要文化財か、時代、緯度、経度の５項目のみを読み込みます。最後に各建造物の緯度と経度のデータをつかって横軸緯度、縦軸経度のグラフ上に散布図をつくります。
+文化庁は国指定文化財等データベース（https://kunishitei.bunka.go.jp/bsys/index） を公開しています。「国宝・重要文化財（建造物）」を開いて「都道府県別にみる」から「京都府」を選択すると一覧がでてきますので、それらを**csv**出力してデータとします（Kyoto_Architecture.csv）。まず、**csv**ファイルを**pandas**の`DataFrame( )`として読み込みますが、その際、名称、国宝か重要文化財か、時代、緯度、経度の５項目のみを読み込みます。最後に各建造物の緯度と経度のデータをつかって横軸緯度、縦軸経度のグラフ上に散布図をつくります。データとしてはベクター型の点のデータです。
 
 <br>
 
@@ -59,11 +67,11 @@ plt.show()
 
 <br>
 
-#### ６－1ー２　地図上への文化財所在地の表示
+#### ６－１ー２　地図上への文化財所在地の表示
 
 <br>
 
-日本地図府県境界データを使って、京都府を描画し、その上に重ねて文化財の所在地を表示します。その際に国宝指定を赤、重要文化財指定を灰色とします。府県境界データはGitHub上に、Data of Japanさん ( https://github.com/dataofjapan/land  )  が公開しているjapan.geojsonというファイルを**GeoPanda**に読み込んで作成します。京都には305件の指定文化財があり、その多くは京都市に集中していますので、京都府全体の図と京都市近傍に拡大した２つの図を作成します。
+日本地図府県境界データを使って、京都府を描画し、その上に重ねて文化財の所在地を表示します。その際に国宝指定を赤、重要文化財指定を灰色とします。府県境界データはGitHub上に、Data of Japanさん ( https://github.com/dataofjapan/land  )  が公開しているjapan.geojsonというファイルを**GeoPanda**に読み込んで作成します。京都には305件の指定文化財がありますが、その多くは京都市に集中していますので、京都府全体の図と京都市近傍に拡大した２つの図を作成します。Data of Japanのデータは区画を表示するポリゴンのベクター型データで、そこに、文化財の点データを重ねる作業です。
 
 ```python
 import geopandas as gpd
@@ -97,7 +105,7 @@ plt.show()
 
 
 
-#### ６ー１ー３　e-statのデータの利用
+### ６ー２　e-statのデータの利用
 
 <br>
 
@@ -107,7 +115,7 @@ plt.show()
 
 次に「e-stat 統計で見る日本」より、国税調査、小区分、境界データを47都道府県分ダウンロードします。トップページ (https://www.e-stat.go.jp/) から、 地図で見る統計（統計GIS) / 境界データダウンロード / 国勢調査 / 2015年 / 小地域（町丁・字等別）（JGD2000）/ 世界測地系緯度経度・Shapefile  / と選択すると、都道府県別に2018-05-18公開のデータが表示されます。例として01 北海道 を選択すると、北海道全域から、小区分にいたる世界測地系緯度経度・Shapefileに至ります。ここから01000 北海道全域をダウンロードします。
 
-ダウンロードした*A002005212012D...*というディレクトリには、*h27ka01*(おそらく平成27年で01は北海道のID)ではじまるう4つのファイルがあり、その中の **.shp** というのがこれから利用するShapfileファイルです。次に、Shapefileの中には位置情報以外にも面積、境界長、人口、世帯数などの多くのデータが含まれてます。
+ダウンロードした*A002005212012D...*というディレクトリには、*h27ka01*(おそらく平成27年で01は北海道のID)ではじまるう4つのファイルがあり、その中の **.shp** というのがこれから利用するShapefile(shp)ファイルです。次に、Shapefileの中には位置情報以外にも面積、境界長、人口、世帯数などの多くのデータが含まれてます。shpファイルはまさにベクター型のデータで表の最後に区画のポリゴンデータが記録されています。
 
 <br>
 
@@ -135,7 +143,7 @@ pref_id=df_jap.id[df_jap['nam_ja']=='宮崎県'].values
 map_id=pref_id[0]-1
 
 fig, ax = plt.subplots(figsize = (16,16)) 
-gdf = gpd.read_file(prefecture_shp[map_id])      #gdf file に変換した。
+gdf = gpd.read_file(prefecture_shp[map_id])      
 gdf.plot(ax=ax, facecolor='white', edgecolor='black', linewidth=0.2)
 ax.set_axis_off()
 plt.show()
@@ -147,7 +155,7 @@ plt.show()
 
 <br>
 
-#### ６ー1ー４階級区分図（かいきゅうくぶんず、choropleth map）
+#### ６ー２ー１　階級区分図（かいきゅうくぶんず、choropleth map）
 
 <br>A choropleth map is a thematic map in which areas are shaded or patterned in proportion to the measurement of the statistical variable being displayed on the map, such as population density or per-capita income. The choropleth map provides an easy way to visualize how a measurement varies across a geographic area or it shows the level of variability within a region. A special type of choropleth map is a prism map, a three-dimensional map in which a given region's height on the map is proportional to the statistical variable's value for that region. (from web)
 
@@ -173,3 +181,75 @@ plt.show()
 
 
 
+### ６ー３ 国土数値情報データベース
+
+
+
+国土の電子情報については国土数値情報サイト(https://nlftp.mlit.go.jp/ksj/) に公開されています。これらのデータを空間的に、あるいは時系列に重ねていくことで、傾斜や高度による植生の違い、またその時系列変化なども可視化することができます。空間情報を利用して新しいビジネスをしょうとアイデアを持っている人もいるかもしれませんね。　ここでは農林水産省林野庁が国有林GISで管理している地図データから、全国の国有林野の小班区画ポリゴンデータをみてみましょう。ダウンロードサイトから、関西地域の2府３県のデータを取得します。データは平成30（2018）年4月1日時点のShpファイルです。次に、国土地理院「基盤地図情報 数値標高モデル 」をベースとした標高傾斜度3次メッシュ（ラスター型データ）から、相当する府県のデータを取得します。
+
+1) 関西地域の2府３県の国有林領域データ
+2) 標高傾斜度データから平均標高と最大傾斜度の数値データ
+3) ６−１で使った日本の府県境界データ
+
+これらを重ねて表示して、国有林（図では赤の部分）の位置と地形を見ましょう。国有林の割合は、日本全との１２％、森林面積の２０％と言われますが、いかに関西地域に国有林が少ないことがわかります。また、都市や主要な交通網から距離のある場所が多いようです。
+
+
+
+```python
+%matplotlib inline
+import matplotlib.pyplot as plt
+import geopandas as gpd
+import pandas as pd
+import numpy as np
+
+dat0_dir='../../GitHubData/DataScience_AI/data/GIS/e-Stat_Kokuzei_Shp' 
+prefecture_shp=sorted(glob.glob(dat0_dir+'/*/*.shp'))
+dat1_dir='../../GitHubData/DataScience_AI/data/GIS/標高傾斜度/' 
+slope_shp=sorted(glob.glob(dat1_dir+'/*/*.shp'))
+dat2_dir='../../GitHubData/DataScience_AI/data/GIS/国有林野データ/' 
+rinya_shp=sorted(glob.glob(dat2_dir+'/*/*.shp'))
+
+
+wakaS_gdf=gpd.read_file(slope_shp[0])
+shigaN_gdf=gpd.read_file(slope_shp[10])
+wakaE_gdf=gpd.read_file(slope_shp[3])
+kyotoN_gdf=gpd.read_file(slope_shp[9])
+
+
+fig, ax = plt.subplots(figsize = (18,18)) 
+
+# 当該メッシュにおける平均標高(緑）　当該メッシュにおける最大傾斜角度（青）　（メッシュデータ（ラスター型）
+wakaS_gdf.plot(column = 'G04a_002',ax=ax, edgecolor='white',cmap='Greens',linewidth=0.2)
+shigaN_gdf.plot(column = 'G04a_002',ax=ax, edgecolor='white',cmap='Greens',linewidth=0.2)
+wakaE_gdf.plot(column = 'G04a_006',ax=ax, edgecolor='white',cmap='Blues',linewidth=0.2)
+kyotoN_gdf.plot(column = 'G04a_006',ax=ax, edgecolor='white',cmap='Blues',linewidth=0.2)
+
+# 関西エリアの国有林ポリゴンデータの表示（赤色）　ポリゴンデータ（ベクター型）
+rinya_kansai=[]
+for i in rinya_shp:
+    rinya_kansai.append(gpd.read_file(i))
+gdf=gpd.GeoDataFrame(pd.concat(rinya_kansai)) 
+gdf.plot(ax=ax, edgecolor='#444',facecolor='red', linewidth=0.2)
+
+# 関西エリアの府県境界データの表示　ポリゴンデータ（ベクター型）
+Kansai_area=[]
+for i in range(24,30):
+    Kansai_area.append(df_jap[df_jap['id'] == i])
+Kansai_gdf=gpd.GeoDataFrame(pd.concat(Kansai_area))
+
+Kansai_gdf.plot(ax=ax, edgecolor='#444',facecolor='none', linewidth = 0.5)
+
+plt.show()
+```
+
+<img src="./img/natfor.png" style="zoom:100%;" />
+
+
+
+
+
+
+
+### ６ー４　練習
+
+１）宮崎県の国有林を図示しなさい。
