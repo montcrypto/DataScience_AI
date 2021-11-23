@@ -109,7 +109,7 @@ $$
 NumPyでは分散共分散行列を`np.cov()`、固有値・固有値ベクトル、 `np.linalg.eig()`で計算することができます。
 
 ```python
-import numpy as np
+data=np.hstack((A,B)) #AとBをひとまとめにしてdataとします。
 mat_cov=np.cov(data)
 print("分散共分散行列 variance-covariance matrix \n{}".format(mat_cov))
 print("\n")
@@ -135,6 +135,8 @@ print("固有ベクトル eigenvector \n{}".format(eig_vector))
 固有値については、6.76と2.36の二つが得られました。大きい方が第一主成分軸、小さい方が第２主成分軸の固有値です。この値の意味は、データの分散の何割を説明するかという寄与率で表すと理解しやすくなります。寄与率は、固有値を両者の和9.12で除した値、74%、26％で与えられます。第１主成分の固有ベクトルは (-0.60823474, -0.7937572) で、これをプロットしたのが、次の左図です。次に、サンプルデータ（$x_{1}, x_{2}$）と固有ベクトルの内積$y_{ij}$を主成分ごとに計算します。この値はスコアーと呼ばれ、新しい軸としてプロットしたのが右図です。
 
 ```python
+import matplotlib.pyplot as plt
+%matplotlib inline
 x=np.arange(-4,4,1)
 pc1=np.dot(data.T,eig_vector.T[1])
 pc2=np.dot(data.T,eig_vector.T[0])
@@ -150,15 +152,16 @@ ax[1].scatter(pc1,pc2)
 ax[1].set_ylim(-4,4)
 ax[1].set_xlabel('PC 1')
 ax[1].set_ylabel('PC 2')
-plt.show()     
+plt.show() 
 ```
 
 ![](./img/PCAnumpy.png)
 
 <br>
 
-このような多変量解析はもとより、機械学習に必要な関数をまとめたパッケージ**scikit-learn**（https://scikit-learn.org/stable/)が利用できます。次にその例を示します。
+このような多変量解析はもとより、機械学習に必要な関数をまとめたパッケージ**scikit-learn**（https://scikit-learn.org/stable/)が利用できます。次にその例を示します。固有値も第一主成分から順に出力されますので安心です。
 ```python
+import pandas as pd
 from sklearn.decomposition import PCA   #主成分分析器
 from sklearn.preprocessing import StandardScaler
 #
@@ -176,7 +179,8 @@ pv = pd.DataFrame(pca.explained_variance_ratio_, index=['pc1','pc2'], columns=['
 display(pv.T)
 # score plots
 cor = pd.DataFrame(pca_cor, columns=['pc1','pc2'])
-cor.plot(x='pc1',y='pc2',kind='scatter', grid=True, legend=True)
+fig, ax = plt.subplots(figsize=(6,6))
+cor.plot(x='pc1',y='pc2',kind='scatter', ax=ax, grid=True, legend=True)
 plt.show()
 ```
 
