@@ -47,7 +47,7 @@ numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow,
 <img src="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" height="50" >
 <img src="https://scikit-image.org/_static/img/logo.png" height="50" >
 
-ハードディスクに余裕があって、いろいろな科学技術計算のパッケージがプレインストールされる方がいいばあいは、anaconda pythonをインストールしてください。
+ハードディスクに余裕があって、いろいろな科学技術計算のパッケージがプレインストールされる方がいい場合は、anaconda pythonをインストールしてください。
 
 <br>
 
@@ -55,7 +55,7 @@ numpy, pandas, scikit-learn, scikit-image, opencv, matplotlib, tqdm, tensorflow,
 
 <br>
 
-Colaboratory（略称: Colab）は、ブラウザから Python を記述、実行できるサービスです。Googleの提供するサービスなので利用する人はGoogleアカウントを取得してください。計算時間とか、ファイルの保存期間とかに制限がありますが、お試しには夢のようなサービスです。
+Colaboratory（略称: Colab）は、ブラウザから Python を記述、実行できるサービスです。Googleの提供するサービスなので利用する人はGoogleアカウントを取得してください。計算時間とか、ファイルの保存期間とかに制限がありますが、GPUも提供されていて深層学習も実行可能なサービスです。
 
 https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU_qrC0
 
