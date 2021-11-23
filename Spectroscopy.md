@@ -157,8 +157,7 @@ plt.show()
 
 <br>
 
-このような多変量解析はもとより、機械学習に必要な関数をまとめたパッケージ**scikit-learn**（https://scikit-learn.org/stable/）が利用できます。次にその例を示します。
-
+このような多変量解析はもとより、機械学習に必要な関数をまとめたパッケージ**scikit-learn**（https://scikit-learn.org/stable/)が利用できます。次にその例を示します。
 ```python
 from sklearn.decomposition import PCA   #主成分分析器
 from sklearn.preprocessing import StandardScaler
