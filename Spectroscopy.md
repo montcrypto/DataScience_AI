@@ -188,15 +188,17 @@ plt.show()
 
 #### ７ー３ー１　練習
 
-１）メランチ属の２次微分スペクトルデータ(2nd_Meranti.xlsx)を読みプロット表示しなさい。
-
-２）二次微分スペクトルをつかって主成分分析を行い、第一主成分軸と第二主成分軸でサンプルの分布を二次元表示しなさい。
+１）対角行列Aの固有値と固有ベクトルを求めなさい。
+$$
+A=\left( \begin{array}{rr}a & b \\ c & d\end{array} \right)
+$$
+２）メランチ属の２次微分スペクトルデータ(2nd_Meranti.xlsx)を読みプロット表示しなさい。
 
 <br>
 
 ### ７ー４　Scikit-learnを使った分類と判別
 
-さて、主成分分析を理解したところで、スペクトルデータに戻ります。サンプル数は88、1スペクトルのデータ数は2001です。indexをサンプル名、カラム名を波数としてpandasのDataFrameに読み込みます。2001次元のデータを3次元に圧縮することを考えます。
+さて、主成分分析を理解したところで、スペクトルデータに戻ります。サンプル数は88、1スペクトルのデータ数は2001です。indexをサンプル名、カラム名を波数としてpandasのDataFrameに読み込みます。2001次元のデータを10次元に圧縮することを考えます。
 
 ```python
 # PCA analyses : wavenuber range  8000-4000 cm-1
@@ -225,11 +227,11 @@ axes[0].bar(np.arange(1,11,1), pca.explained_variance_ratio_, align = "center")
 axes[0].set_title("Screeplot of "+title)
 axes[0].set_xlabel("components")
 axes[0].set_ylabel("contribution")
-# ２次微分曲線
+# ２次微分曲線の表示
 axes[1].plot(df.columns,X.T,linewidth = 2 ) ## x 10e3 
 axes[1].set_title("2nd dev spectra of "+title)
 axes[1].invert_xaxis()
-# 因子付加量
+# 因子負荷量の表示
 loadings = pca.components_*np.c_[np.sqrt(pca.explained_variance_)]
 axes[2].plot(df.columns,loadings[0],linewidth = 2, label='PC1 loading')
 axes[2].plot(df.columns,loadings[1],linewidth = 2, label='PC2 loading' )
@@ -241,6 +243,10 @@ plt.show()
 ```
 
 ![](./img/NIR_loading.png)
+
+この場合、10次元まで表示しましたが、第３主成分まででサンプルのもつ分散のほぼ98％が説明されていることがわかります。よって、ここから先は３成分のみに対象をかぎって進めます。
+
+それぞれのサンプルの主成分値は、2次微分スペクトルに係数hを掛けて線形和を求めたものですが、2001個のスペクトルデータそれぞれにかける$h$は$（固有値の平方根）・（固有ベクトル）$で与えられます。
 
 
 
