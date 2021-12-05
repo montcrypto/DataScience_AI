@@ -17,6 +17,7 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
     markers = ('s', 'x', 'o', '^', 'v')
     colors = ('red', 'blue', 'lightgreen', 'gray', 'cyan')
     cmap = ListedColormap(colors[:len(np.unique(y))])
+    #labels=['Balau','Heavy Red Meranti','Light Red Meranti','White Meranti']
 
     x1_min, x1_max = X[:, 0].min() - 1, X[:, 0].max() + 1
     x2_min, x2_max = X[:, 1].min() - 1, X[:, 1].max() + 1
@@ -52,8 +53,8 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
                     label='test set')
 
     # グラフ表示
-    plt.xlabel('petal length [standardized]')
-    plt.ylabel('petal width [standardized]')
+    plt.xlabel('1st component')
+    plt.ylabel('2nd component')
     plt.legend(loc='upper left')
     plt.tight_layout()
     plt.show()    
