@@ -53,8 +53,8 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
                     label='test set')
 
     # グラフ表示
-    plt.xlabel('1st component')
-    plt.ylabel('2nd component')
+    plt.xlabel('X')
+    plt.ylabel('Y')
     plt.legend(loc='upper left')
     plt.tight_layout()
     plt.show()    
