@@ -396,11 +396,5 @@ plot_decision_regions(X_xor, Y_xor, classifier=clf, resolution=0.02)
 
 <img src="./img/XOR_svm.png" style="zoom:70%;" />
 
+このように、線形ではできないような判別が非線形の判別器では可能です。
 
-
-```
-from sklearn.datasets import fetch_olivetti_faces
-
-faces = fetch_olivetti_faces()
-print(faces.DESCR)
-```
