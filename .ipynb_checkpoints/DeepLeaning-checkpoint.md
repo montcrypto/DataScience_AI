@@ -12,13 +12,13 @@
 
 <br>
 
-### ８ー１　デジタル画像
+### ８−１　デジタル画像
 
 デジタル画像に対する言葉にはアナログ画像があります。アナログとは写真機でフィルムに記録したもの、あるいは絵や書物など、濃度や解像度が連続的なものです。それに対してデジタル画像は、２次元の画素の集合体です。画素はピクセルやドットと呼ばれますが、デジタル画像の最小単位で、位置と強度の情報を持ちます。
 
 <br>
 
-#### ８ー１ー１　標本化と量子化
+#### ８−１−１　標本化と量子化
 
 アナログからデジタルへの変換は標本化と量子化の2つのプロセスで処理されます。標本化とは図①に示すように連続した信号を一定の間隔でサンプリングすることです。図１はマツの木口面の写真の一部を年輪に垂直な方向に標本化したもので、アナログ曲線がが一定間隔の点の集合となりました。この段階ではそれぞれの点の持つ強度は浮動小数点ですが、図②に示すように、強度を整数倍（通常2の冪乗）に分割された階級値に丸めます。これを量子化と言います。このようにして、２次元双方に標本化して強度を量子化したものがデジタル画像です。
 
@@ -44,7 +44,7 @@ $$
 
 <br>
 
-#### ８ー１ー２　画像ファイルの構造
+#### ８−１−２　画像ファイルの構造
 
 実は、すでにGISのところで扱ったラスタータイプのデータがまさにデジタル画像です。青森県の「まるごと青森」というHPから写真をお借りしました。この画像をスクリプトで読み込んでみます。
 
@@ -108,7 +108,7 @@ array([[132, 132, 132, 132, 133, 133, 134, 134, 134, 135],
 
 <br>
 
-### ８ー３　学習が必要な理由
+### ８−３　学習が必要な理由
 
 まず、上の写真からリンゴを抜き出すのにはどうしたらいいでしょうか？それぞれの標本が持つ固有の特徴を求める必要があります。リンゴは赤いから赤のチャンネルの値を使って閾値を決めることができるでしょうか。次のスプリプトでは、レベル200より大きなもピクセルをリンゴとしてみましたが、リンゴを選択的に抜き出すことはできていません。つまり、日当たりの良いものもあれば、葉や枝の影になっているもの、さらにはリンゴのうしろに隠れているリンゴとか、一つの基準では到底線引きのできないリンゴが写っているわけです。ではなぜ我々が認識できるのかといえば、丸い形であるとかも含め、複数の基準で持って判断をしていることに他なりません。そのような情報を計算機に学習させることができれば賢いAIができることになります。
 
@@ -122,7 +122,7 @@ plt.show()
 
 <br>
 
-### ８ー４　深層学習とは
+### ８−４　深層学習とは
 
 <img src="./img/sl_dl.png" style="zoom:70%;" />
 
@@ -136,7 +136,7 @@ plt.show()
 
 <br>
 
-#### ８ー４ー１　ニューラルネットワーク
+#### ８−４−１　ニューラルネットワーク
 
 選択肢となる要素はニューロンと呼ばれる脳神経細胞から発想を得て考案されたものです。脳神経細胞では、樹状突起という部位で他の細胞から複数の入力を受けとり、入力がある一定以上に達すると信号を出力すると考えられています。それをモデルにしたのがとパーセプトロンであり、1957年にローゼンブラッドにより発明されたました。左図がニューロン、右図がパーセプトロンです。一言で言えば、複数の入力に対して１つの出力を行う関数です。
 
@@ -167,265 +167,5 @@ $$
 
 <img src="./img/convolution.png" style="zoom:30%;" />
 
-> CS231n Convolutional Neural Networks for Visual Recognition Course Website https://cs231n.github.io/convolutional-networks/
->
-> **Convolution Demo**. Below is a running demo of a CONV layer. Since 3D volumes are hard to visualize, all the volumes (the input volume (in blue), the weight volumes (in red), the output volume (in green)) are visualized with each depth slice stacked in rows. The input volume is of size W1=5,H1=5,D1=3W1=5,H1=5,D1=3, and the CONV layer parameters are K=2,F=3,S=2,P=1K=2,F=3,S=2,P=1. That is, we have two filters of size 3×33×3, and they are applied with a stride of 2. Therefore, the output volume size has spatial size (5 - 3 + 2)/2 + 1 = 3. Moreover, notice that a padding of P=1P=1 is applied to the input volume, making the outer border of the input volume zero. The visualization below iterates over the output activations (green), and shows that each element is computed by elementwise multiplying the highlighted input (blue) with the filter (red), summing it up, and then offsetting the result by the bias.
-
-
-
-このような計算を繰り返して、何枚ものフィルター処理をしてデータの局所領域の特徴を抽出つつ、ストライドで画像を縮小することを繰り返して最終的に、２次元の画像の情報を一次元のベクトルに落とし込んで、判別問題あるいは回帰問題のモデル（最小二乗法によって$w_i$などを解く）を求めます。
-
-
-
-#### ８ー４ー３　一連の画像の処理、フィルタリング（コンボリューション）
-
-フィルターの設計
-
-```python
-import numpy as np
-w1=[-1,-1,-1,0,0,0,1,1,1]
-w2=[-1,0,1,-1,0,1,-1,0,1]
-w3=[-1,-0.5,0,-0.5,0,0.5,0,0.5,1]
-w4=[-1,0.5,-1,0.5,1,0.5,-1,0.5,-1]
-w5=[1,0.5,1,0.5,-1,0.5,1,0.5,1]
-w=np.array([w1,w2,w3,w4,w5])
-wi=w.reshape(5,3,3)
-```
-
-
-
-画像の読み込み
-
-```python
-from PIL import Image
-import matplotlib.pyplot as plt
-im=Image.open('FLM/lotus.png')
-imc=np.array(im.convert('L'))
-plt.imshow(im)
-plt.axis('off')
-plt.show()
-```
-
-<img src="./img/lotus.png"/>
-
-
-
-フィルターによる畳み込み計算
-
-```python
-from scipy import signal
-imgs=[]
-num=5
-fig, ax = plt.subplots(ncols=num,nrows=2, figsize=(10,4))
-
-for i in range(num):
-    imca=signal.convolve2d(imc,wi[i])
-    imgs.append(imca)
-    ax[0,i].imshow(wi[i],cmap='gray')
-    ax[0,i].axis('off')
-    ax[1,i].imshow(imca,cmap='gray')
-    ax[1,i].axis('off')
-plt.show()
-```
-
-![](./img/filter_img.png)
-
-
-
-線型結合してストライド２で最大値プーリング
-
-```python
-from skimage import measure
-imgsum=np.array(imgs).sum(axis=0)
-fig, ax = plt.subplots(ncols=3,nrows=1, figsize=(10,5))
-ax[0].imshow(imc,cmap='gray')
-ax[0].axis('off')
-ax[1].imshow(imgsum,cmap='gray')
-ax[1].axis('off')
-ax[2].imshow(measure.block_reduce(imgsum, (2,2), np.max),cmap='gray')
-ax[2].axis('off')
-plt.show()
-
-img_mpx=measure.block_reduce(imgsum, (2,2), np.max)
-```
-
-<img src="./img/max_pool.png" style="zoom:50%;" />
-
-上の畳み込みとダウンサイジング・プーリングを繰り返す。
-
-```python
-imgs=[]
-num=5
-fig, ax = plt.subplots(ncols=num,nrows=2, figsize=(10,4))
-for i in range(num):
-    imca=signal.convolve2d(img_mpx,wi[i])
-    imgs.append(imca)
-    ax[0,i].imshow(wi[i],cmap='gray')
-    ax[0,i].axis('off')
-    ax[1,i].imshow(imca,cmap='gray')
-    ax[1,i].axis('off')
-plt.show()
-imgsum=np.array(imgs).sum(axis=0)
-fig, ax = plt.subplots(ncols=3,nrows=1, figsize=(10,5))
-ax[0].imshow(imc,cmap='gray')
-ax[0].axis('off')
-ax[1].imshow(imgsum,cmap='gray')
-ax[1].axis('off')
-ax[2].imshow(measure.block_reduce(imgsum, (2,2), np.max),cmap='gray')
-ax[2].axis('off')
-plt.show()
-
-img_mpx=measure.block_reduce(imgsum, (2,2), np.max)
-```
-
-<img src="./img/filter_stride_pool.png" style="zoom:50%;" />
-
-
-
-
-
-### ８ー５　簡単なネットワークの実装
-
-```python
-20210801 / macos m1 arm64 cpu tensorflow 2.4.0 on python 3.8.10 M1Mac 時間：540.3081290721893 / macos m1 AMD gpu tensorflow 2.5.0 (tensorflow-metal) on python 3.8.10 M1Mac　時間：564.2957329750061 / macos intel cpu tesorflow 2.4.1 on python 3.8.2 Home-MacBookPro 時間：582.744699716568 / Ubuntu tensorflow 2.2.0 python 3.6.10 dl-box GPU 時間：424.43397879600525
-
-Convolutional Neural Network （CNN) の実装
-簡単なConvolutional Neural Networkを作成して、WIGのデータを使って119属の識別問題を実装します。
-
-ここでは計算量が大きくなるため、WIGのデータ(900x900)を縮小して、64x64x3にします。
-[1]:
-
-# Introduction to convnets
-import tensorflow as tf
-from tensorflow.keras import datasets, layers, models
-from mygens import *
-import logging
-logging.getLogger("tensorflow").setLevel(logging.ERROR) 
-tf.autograph.set_verbosity(0)
-print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
-Num GPUs Available:  0
-４層からなるネットワークを作成してみます。
-[2]:
-
-# example of 4 layered convnet
-model = models.Sequential()
-​
-model.add(layers.Conv2D(16, (3, 3), activation='relu', input_shape=(64, 64, 3)))
-model.add(layers.MaxPooling2D((2, 2)))
-model.add(layers.Conv2D(32, (3, 3), activation='relu'))
-model.add(layers.MaxPooling2D((2, 2)))
-model.add(layers.Conv2D(64, (3, 3), activation='relu'))
-model.add(layers.MaxPooling2D((2, 2)))
-model.add(layers.Conv2D(128, (3, 3), activation='relu'))
-2021-12-15 23:30:43.852582: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-トップレイヤーに識別器をおきます。softmax関数で、119の属に全結合の２層入れます。
-[3]:
-
-# classifier on top of the convnet
-model.add(layers.Flatten())
-model.add(layers.Dense(128, activation='relu'))
-model.add(layers.Dense(119, activation='softmax'))
-モデルの構造を確認します。
-
-
-
-### generatoru of training data from WIG database
-import pandas as pd
-import h5py
-import os
-        
-hdf_path="WIG_v1.2.1_900.h5"
-path_list=[]
-label_list=[]
-​
-def GetOnlyDataset(name, obj):
-    if isinstance(obj, h5py.Dataset):
-        path_list.append(name)
-        lbl= name.split('/')
-        label=os.path.join(lbl[0],lbl[1],lbl[2])
-        label_list.append(lbl[2])
-​
-with h5py.File(hdf_path,'r') as f:  
-    f.visititems(GetOnlyDataset)
-​
-label_num_list, out= pd.factorize(label_list)
-label_num_list.max()
-​
-f=h5py.File(hdf_path,'r') 
-trainset=ImageDataGenerator()
-tragen=trainset.flow_from_directory(f,path_list,label_num_list,72)
-​
-valset=ImageDataGenerator()
-valgen=valset.flow_from_directory(f,path_list,label_num_list,36)
-[6]:
-
-### Training convnet on WIG 64x64 images of 119 genus
-### nearly one hour by my MacbookPro
-​
-model.compile(optimizer='adam',
-              loss='categorical_crossentropy',
-              metrics=['accuracy'])
-import time
-# 処理前の時刻
-t1 = time.time() 
-#
-res=model.fit(tragen, steps_per_epoch=50,validation_data=valgen, validation_steps=50, epochs=10)
-# 処理後の時刻
-t2 = time.time()
  
-import socket
-# コンピュータ名を取得
-host = socket.gethostname()
-print(host)  
-​
-# 経過時間を表示
-elapsed_time = t2-t1
-print(f"処理時間：{elapsed_time}")
 
-
-# result(res)に出力されたデータをプロットする。
-# 図と計算結果のモデルを保存する。
-​
-import matplotlib.pyplot as plt
-%matplotlib inline
-​
-acc=res.history['accuracy']
-loss=res.history['loss']
-val_acc=res.history['val_accuracy']
-val_loss=res.history['val_loss']
-epochs=range(1,len(acc)+1)
-fig, ax1= plt.subplots(figsize=(10,8))
-ax2=ax1.twinx()
-ax1.plot(epochs, acc, 'go', label='training accuracy')
-ax2.plot(epochs, loss, 'c^', label='training loss')
-ax1.plot(epochs, val_acc, 'bo', label='validation accuracy')
-ax2.plot(epochs, val_loss, 'm^', label='validation loss')
-ax1.set_xlabel('epochs')
-ax1.set_ylabel('accuracy')
-ax2.set_ylabel('loss')
-ax1.legend()
-ax2.legend()
-plt.savefig('test.png')
-plt.show()
-# modelを保存する。
-model.save('1stCNN_WIG_64_64_10epo.h5')
-​
-
-End of Script
-[ ]:
-
-​
-[ ]:
-
-​
-[ ]:
-
-​
-
-
-```
-
-
-
-oth CNN 1st CNN GIT にコピーすること。
