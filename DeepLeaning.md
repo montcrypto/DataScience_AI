@@ -286,15 +286,15 @@ img_mpx=measure.block_reduce(imgsum, (2,2), np.max)
 
 ### ８ー５　簡単なネットワークの実装
 
-```python
-20210801 / macos m1 arm64 cpu tensorflow 2.4.0 on python 3.8.10 M1Mac 時間：540.3081290721893 / macos m1 AMD gpu tensorflow 2.5.0 (tensorflow-metal) on python 3.8.10 M1Mac　時間：564.2957329750061 / macos intel cpu tesorflow 2.4.1 on python 3.8.2 Home-MacBookPro 時間：582.744699716568 / Ubuntu tensorflow 2.2.0 python 3.6.10 dl-box GPU 時間：424.43397879600525
-
 Convolutional Neural Network （CNN) の実装
-簡単なConvolutional Neural Networkを作成して、WIGのデータを使って119属の識別問題を実装します。
+簡単なConvolutional Neural Networkを作成して、WIGのデータを使って119属の識別問題を実装します。ここでは計算量が大きくなるため、WIGのデータ(900x900)を縮小して、64x64x3にします。
 
-ここでは計算量が大きくなるため、WIGのデータ(900x900)を縮小して、64x64x3にします。
-[1]:
 
+
+４層からなるネットワークを作成してみます。
+
+
+```python
 # Introduction to convnets
 import tensorflow as tf
 from tensorflow.keras import datasets, layers, models
@@ -303,13 +303,15 @@ import logging
 logging.getLogger("tensorflow").setLevel(logging.ERROR) 
 tf.autograph.set_verbosity(0)
 print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
-Num GPUs Available:  0
-４層からなるネットワークを作成してみます。
-[2]:
+```
 
+
+
+
+
+```python
 # example of 4 layered convnet
 model = models.Sequential()
-​
 model.add(layers.Conv2D(16, (3, 3), activation='relu', input_shape=(64, 64, 3)))
 model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Conv2D(32, (3, 3), activation='relu'))
@@ -317,19 +319,18 @@ model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Conv2D(64, (3, 3), activation='relu'))
 model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Conv2D(128, (3, 3), activation='relu'))
-2021-12-15 23:30:43.852582: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-トップレイヤーに識別器をおきます。softmax関数で、119の属に全結合の２層入れます。
-[3]:
+```
 
+トップレイヤーに識別器をおきます。softmax関数で、119の属に全結合の２層入れます。
+
+```python
 # classifier on top of the convnet
 model.add(layers.Flatten())
 model.add(layers.Dense(128, activation='relu'))
 model.add(layers.Dense(119, activation='softmax'))
+```
 モデルの構造を確認します。
-
-
-
+```python
 ### generatoru of training data from WIG database
 import pandas as pd
 import h5py
@@ -358,11 +359,15 @@ tragen=trainset.flow_from_directory(f,path_list,label_num_list,72)
 ​
 valset=ImageDataGenerator()
 valgen=valset.flow_from_directory(f,path_list,label_num_list,36)
-[6]:
+```
 
+
+
+
+
+```python
 ### Training convnet on WIG 64x64 images of 119 genus
 ### nearly one hour by my MacbookPro
-​
 model.compile(optimizer='adam',
               loss='categorical_crossentropy',
               metrics=['accuracy'])
@@ -382,14 +387,17 @@ print(host)
 # 経過時間を表示
 elapsed_time = t2-t1
 print(f"処理時間：{elapsed_time}")
+```
 
 
+
+
+
+```python
 # result(res)に出力されたデータをプロットする。
 # 図と計算結果のモデルを保存する。
-​
 import matplotlib.pyplot as plt
 %matplotlib inline
-​
 acc=res.history['accuracy']
 loss=res.history['loss']
 val_acc=res.history['val_accuracy']
@@ -410,20 +418,6 @@ plt.savefig('test.png')
 plt.show()
 # modelを保存する。
 model.save('1stCNN_WIG_64_64_10epo.h5')
-​
-
-End of Script
-[ ]:
-
-​
-[ ]:
-
-​
-[ ]:
-
-​
-
-
 ```
 
 
