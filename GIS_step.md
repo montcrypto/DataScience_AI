@@ -52,7 +52,7 @@ import os
 import matplotlib.pyplot as plt
 import pandas as pd
 
-df_temple = pd.read_csv('../../GitHubData/DataScience_AI/data/GIS/Kyoto_Architecture.csv',\
+df_temple = pd.read_csv('DataScience_AI/data/GIS/Kyoto_Architecture.csv',\
                         usecols = [2, 5, 8, 16, 17],\
                         dtype  = {'名称': str, '種別1': str, '時代': str, '緯度': float, '経度': float})
 df_temple = df_temple.rename(columns = {'名称': 'article', '種別1': 'category',\
@@ -75,7 +75,7 @@ plt.show()
 
 ```python
 import geopandas as gpd
-df_jap = gpd.read_file('../../GitHubData/DataScience_AI/data/GIS/japan.geojson')
+df_jap = gpd.read_file('DataScience_AI/data/GIS/japan.geojson')
 
 
 colors=[]
@@ -248,8 +248,14 @@ plt.show()
 
 
 
-
+<br>
 
 ### ６ー４　練習
 
 １）宮崎県の国有林を図示しなさい。
+
+<br>
+
+------
+
+<br>

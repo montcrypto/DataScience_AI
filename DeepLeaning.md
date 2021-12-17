@@ -50,7 +50,7 @@ $$
 
 ![](./img/apples.png)
 
-
+<br>
 
 ```python
 from PIL import Image
@@ -86,7 +86,7 @@ plt.show()
 
 ![](./img/rgb.png)
 
-
+<br>
 
 実際に左上から10x10ピクセルのチャンネル０即ち赤の数値データは以下の通りで,　0~255までの整数、即ち８bitであることがわかりました。
 
@@ -108,7 +108,7 @@ array([[132, 132, 132, 132, 133, 133, 134, 134, 134, 135],
 
 <br>
 
-### ８ー３　学習が必要な理由
+### ８ー２　学習が必要な理由
 
 まず、上の写真からリンゴを抜き出すのにはどうしたらいいでしょうか？それぞれの標本が持つ固有の特徴を求める必要があります。リンゴは赤いから赤のチャンネルの値を使って閾値を決めることができるでしょうか。次のスプリプトでは、レベル200より大きなもピクセルをリンゴとしてみましたが、リンゴを選択的に抜き出すことはできていません。つまり、日当たりの良いものもあれば、葉や枝の影になっているもの、さらにはリンゴのうしろに隠れているリンゴとか、一つの基準では到底線引きのできないリンゴが写っているわけです。ではなぜ我々が認識できるのかといえば、丸い形であるとかも含め、複数の基準で持って判断をしていることに他なりません。そのような情報を計算機に学習させることができれば賢いAIができることになります。
 
@@ -122,9 +122,11 @@ plt.show()
 
 <br>
 
-### ８ー４　深層学習とは
+### ８ー３　深層学習とは
 
 <img src="./img/sl_dl.png" style="zoom:70%;" />
+
+<br>
 
 図に示すように、コンピュータによる機械学習を用いた人工知能の設計には、大きく分けて２つの方法があります。一つは、人が設計したルールに従って、人が行えないような判定をコンピュータに下させるという試みです。まず、デジタル画像を、人が設計した特徴抽出法により数値化し、次に数値化した特徴を、人が設計したルールを盛り込んだ判別器にかけます。この方法は、コンピュータが「何をみているか」検証しやすいという利点を持ち合わせています。これを薄層学習と呼ぶ人もいます。
 
@@ -136,11 +138,13 @@ plt.show()
 
 <br>
 
-#### ８ー４ー１　ニューラルネットワーク
+#### ８ー３ー１　ニューラルネットワーク
 
 選択肢となる要素はニューロンと呼ばれる脳神経細胞から発想を得て考案されたものです。脳神経細胞では、樹状突起という部位で他の細胞から複数の入力を受けとり、入力がある一定以上に達すると信号を出力すると考えられています。それをモデルにしたのがとパーセプトロンであり、1957年にローゼンブラッドにより発明されたました。左図がニューロン、右図がパーセプトロンです。一言で言えば、複数の入力に対して１つの出力を行う関数です。
 
  ![](./img/perceptron_neuron.png)
+
+<br>
 
 右図で$X1, X2…$は入力信号、$w1, w2…$は重みを表す。入力に重みが乗算され、その総和が閾値を超えたら１を、それ以外は０を出力する。実際には、ニューロンが発火するか否かは、活性化関数で数式化されます。単純なステップ関数、シグモイド関数や、ReLU（Rectified Linear Unit)と呼ばれる非線形関数がある。
 $$
@@ -157,9 +161,9 @@ $$
 
 ![](./img/XOR_net.png)
 
+<br>
 
-
-#### ８ー４ー２　コンボリューショナルニューラルネットワーク
+#### ８ー３ー２　コンボリューショナルニューラルネットワーク
 
 画像の２次元的な情報を学習するアルゴリズムの基本形が、いわゆる畳み込みニューラルネットワーク(CNN：Convolutional Neural Network)です。畳み込み計算とは、ある関数$A$を平行移動しながら関数$B$に掛ける、足す処理である。パーセプトロンの$X_1$に相当するのが、$n \times n$小領域の２次元の画像で、$w_1$に相当するのが、局所的な濃度変化、エッジなどを検出するフィルター演算処理（積和）である。引き続いて、$n \times n$小領域を１ピクセルずつずらしながら画像全域に対して処理することで、フィルターの数だけ新しい画像を出力して、次の層へ繋ぎます。$n \times n$小領域を２ピクセルずつずらすと、出力画像は入力画像のほぼ2分の１のサイズとなるが、この様にして、画像を徐々に縮小しながら、解像度の異なる特徴の抽出層を構築している。図は、入力画像、$5\times5$に対して、$3\times3$のフィルター処理を施す例である。まず、入力画像の外周に一列加え（パッディング=1）、１ピクセルおきに（ストライド=2）フィルタ処理を施し、結果として3x3の出力画像を得ている。
 
@@ -171,15 +175,15 @@ $$
 >
 > **Convolution Demo**. Below is a running demo of a CONV layer. Since 3D volumes are hard to visualize, all the volumes (the input volume (in blue), the weight volumes (in red), the output volume (in green)) are visualized with each depth slice stacked in rows. The input volume is of size W1=5,H1=5,D1=3W1=5,H1=5,D1=3, and the CONV layer parameters are K=2,F=3,S=2,P=1K=2,F=3,S=2,P=1. That is, we have two filters of size 3×33×3, and they are applied with a stride of 2. Therefore, the output volume size has spatial size (5 - 3 + 2)/2 + 1 = 3. Moreover, notice that a padding of P=1P=1 is applied to the input volume, making the outer border of the input volume zero. The visualization below iterates over the output activations (green), and shows that each element is computed by elementwise multiplying the highlighted input (blue) with the filter (red), summing it up, and then offsetting the result by the bias.
 
-
+<br>
 
 このような計算を繰り返して、何枚ものフィルター処理をしてデータの局所領域の特徴を抽出つつ、ストライドで画像を縮小することを繰り返して最終的に、２次元の画像の情報を一次元のベクトルに落とし込んで、判別問題あるいは回帰問題のモデル（最小二乗法によって$w_i$などを解く）を求めます。
 
+<br>
 
+#### ８ー３ー３　一連の処理、フィルタリング（コンボリューション）、プーリング
 
-#### ８ー４ー３　一連の画像の処理、フィルタリング（コンボリューション）
-
-フィルターの設計
+$3 \times  3$の$w_1$から$w_5$の簡単なフィルターを設計します。
 
 ```python
 import numpy as np
@@ -192,14 +196,14 @@ w=np.array([w1,w2,w3,w4,w5])
 wi=w.reshape(5,3,3)
 ```
 
+<br>
 
-
-画像の読み込み
+浄土宗の本山で東山の華頂山にある知恩院というお寺で蓮の花を写真に撮りました。その画像を、画像の読み込みます。みなさんもお気に入りの写真で試してください。
 
 ```python
 from PIL import Image
 import matplotlib.pyplot as plt
-im=Image.open('FLM/lotus.png')
+im=Image.open('lotus.png')
 imc=np.array(im.convert('L'))
 plt.imshow(im)
 plt.axis('off')
@@ -208,9 +212,9 @@ plt.show()
 
 <img src="./img/lotus.png"/>
 
+<br>
 
-
-フィルターによる畳み込み計算
+フィルターによる畳み込み計算を最初の3つのフィルターは垂直方向、水平方向、対角線方向に濃度差を持たせたもので、その方向に垂直なエッジ（濃度の変化があるところ）が強調されているのがわかります。4番目と5番目のフィルターは逆に輪郭を隈取りするような効果があるかに見えます。
 
 ```python
 from scipy import signal
@@ -228,11 +232,11 @@ for i in range(num):
 plt.show()
 ```
 
-![](./img/filter_img.png)
+<img src="./img/filter_img.png" style="zoom:50%;" />
 
+<br>
 
-
-線型結合してストライド２で最大値プーリング
+次に原画像とフィルター後の5枚の写真を線形結合したもの、さらにストライド2（1ピクセルおきに）最大値プーリングした画像を見てみます。
 
 ```python
 from skimage import measure
@@ -251,153 +255,137 @@ img_mpx=measure.block_reduce(imgsum, (2,2), np.max)
 
 <img src="./img/max_pool.png" style="zoom:50%;" />
 
-上の畳み込みとダウンサイジング・プーリングを繰り返す。
+<br>
 
-```python
-imgs=[]
-num=5
-fig, ax = plt.subplots(ncols=num,nrows=2, figsize=(10,4))
-for i in range(num):
-    imca=signal.convolve2d(img_mpx,wi[i])
-    imgs.append(imca)
-    ax[0,i].imshow(wi[i],cmap='gray')
-    ax[0,i].axis('off')
-    ax[1,i].imshow(imca,cmap='gray')
-    ax[1,i].axis('off')
-plt.show()
-imgsum=np.array(imgs).sum(axis=0)
-fig, ax = plt.subplots(ncols=3,nrows=1, figsize=(10,5))
-ax[0].imshow(imc,cmap='gray')
-ax[0].axis('off')
-ax[1].imshow(imgsum,cmap='gray')
-ax[1].axis('off')
-ax[2].imshow(measure.block_reduce(imgsum, (2,2), np.max),cmap='gray')
-ax[2].axis('off')
-plt.show()
-
-img_mpx=measure.block_reduce(imgsum, (2,2), np.max)
-```
+上の畳み込みとダウンサイジング・プーリングを繰り返してみます。同じ5つのフィルター処理に加えて、ストライド２で圧縮した画像は次のようになりました。画像が簡略化されて、特徴が単純化していくことがわかるでしょうか。実際はフィルターが変数となって最小二乗法によって最適化されて、より画像の特徴を捉えるように変化していく、と考えてください。
 
 <img src="./img/filter_stride_pool.png" style="zoom:50%;" />
 
+<br>
 
+#### ８ー３ー４　判別あるいは回帰関数
 
+ネットワークの最後には、判別問題や回帰問題に合わせて関数を設定します。さまざまありますが、複数の出力値の合計が「1.0」（＝100％）になるような値を返すソフトマックス(Softmax)関数は、主に分類問題の出力層で使われます。一方で、回帰問題の場合は、Root Mean Squared Error (RMSE)あるいはMean Absolute Error (MAE)といった精度評価指標が使われます。
 
+<br>
 
-### ８ー５　簡単なネットワークの実装
+### ８ー４　簡単な識別ネットワークの試作
 
-Convolutional Neural Network （CNN) の実装
-簡単なConvolutional Neural Networkを作成して、WIGのデータを使って119属の識別問題を実装します。ここでは計算量が大きくなるため、WIGのデータ(900x900)を縮小して、64x64x3にします。
+数年前、農工大の学生さん達と京都御所に植栽されている樹木の樹皮の画像データベースを作りました。各自撮影した写真を樹種ごとにフォルダにまとめ、各画像の中心部分から$128 \times 128$ pixelの画像を切りとったのが下の図です。全体の85%のデータを学習用に、残りの15％を評価用としてtrainとtestデータベースを準備します。
 
+![](./img/bark_gosho.png)
 
-
-４層からなるネットワークを作成してみます。
+ここでは、ジェネレーターを使って学習用のデータを水増ししています。上下に反転させたり、回転させたりなどして、手持ちのデータを増やす工夫です。
 
 
 ```python
-# Introduction to convnets
+import numpy as np
 import tensorflow as tf
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.utils import to_categorical
 from tensorflow.keras import datasets, layers, models
-from mygens import *
-import logging
-logging.getLogger("tensorflow").setLevel(logging.ERROR) 
-tf.autograph.set_verbosity(0)
-print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
+
+imsz=128
+epochs_num=100
+
+test=np.load('Datascience_AI/CV/CNN/test_128_128.npz')
+train=np.load('Datascience_AI/CV/CNN/train_128_128.npz')
+num_classes=len(train['arr_2'])
+x_train,y_train,x_test,y_test=train['arr_0'],train['arr_1'],test['arr_0'],test['arr_1']
+y_train = to_categorical(y_train, num_classes)
+y_test = to_categorical(y_test, num_classes)
+
+datagen = ImageDataGenerator(
+    rotation_range=20,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    horizontal_flip=True)
+
+datagen.fit(x_train)
 ```
 
-
-
-
+単純な4層からなる直列のモデルを作成します。
 
 ```python
 # example of 4 layered convnet
 model = models.Sequential()
-model.add(layers.Conv2D(16, (3, 3), activation='relu', input_shape=(64, 64, 3)))
+model.add(layers.Conv2D(16, (3, 3), activation='relu', input_shape=(imsz, imsz, 3)))
 model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Conv2D(32, (3, 3), activation='relu'))
 model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Conv2D(64, (3, 3), activation='relu'))
 model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Conv2D(128, (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(256, (3, 3), activation='relu'))
 ```
 
-トップレイヤーに識別器をおきます。softmax関数で、119の属に全結合の２層入れます。
+トップレイヤーに識別器をおきます。softmax関数で、20種の解に全結合の２層を入れました。
 
 ```python
 # classifier on top of the convnet
 model.add(layers.Flatten())
 model.add(layers.Dense(128, activation='relu'))
-model.add(layers.Dense(119, activation='softmax'))
+model.add(layers.Dense(num_classes, activation='softmax'))
 ```
 モデルの構造を確認します。
 ```python
-### generatoru of training data from WIG database
-import pandas as pd
-import h5py
-import os
-        
-hdf_path="WIG_v1.2.1_900.h5"
-path_list=[]
-label_list=[]
-​
-def GetOnlyDataset(name, obj):
-    if isinstance(obj, h5py.Dataset):
-        path_list.append(name)
-        lbl= name.split('/')
-        label=os.path.join(lbl[0],lbl[1],lbl[2])
-        label_list.append(lbl[2])
-​
-with h5py.File(hdf_path,'r') as f:  
-    f.visititems(GetOnlyDataset)
-​
-label_num_list, out= pd.factorize(label_list)
-label_num_list.max()
-​
-f=h5py.File(hdf_path,'r') 
-trainset=ImageDataGenerator()
-tragen=trainset.flow_from_directory(f,path_list,label_num_list,72)
-​
-valset=ImageDataGenerator()
-valgen=valset.flow_from_directory(f,path_list,label_num_list,36)
+model.summary()
 ```
 
+```text
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 126, 126, 16)      448       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 63, 63, 16)        0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 61, 61, 32)        4640      
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 30, 30, 32)        0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 28, 28, 64)        18496     
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 14, 14, 64)        0         
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 12, 12, 128)       73856     
+_________________________________________________________________
+max_pooling2d_3 (MaxPooling2 (None, 6, 6, 128)         0         
+_________________________________________________________________
+conv2d_4 (Conv2D)            (None, 4, 4, 256)         295168    
+_________________________________________________________________
+flatten (Flatten)            (None, 4096)              0         
+_________________________________________________________________
+dense (Dense)                (None, 128)               524416    
+_________________________________________________________________
+dense_1 (Dense)              (None, 20)                2580      
+=================================================================
+Total params: 919,604
+Trainable params: 919,604
+Non-trainable params: 0
+_________________________________________________________________
+```
 
-
-
+モデルの計算に必要な多次元の配列をメモリ上に確保して、計算を始めます。この際に、GPUなどの高速演算装置があると圧倒的な効率化が可能になります。
 
 ```python
-### Training convnet on WIG 64x64 images of 119 genus
-### nearly one hour by my MacbookPro
 model.compile(optimizer='adam',
               loss='categorical_crossentropy',
               metrics=['accuracy'])
-import time
-# 処理前の時刻
-t1 = time.time() 
-#
-res=model.fit(tragen, steps_per_epoch=50,validation_data=valgen, validation_steps=50, epochs=10)
-# 処理後の時刻
-t2 = time.time()
- 
-import socket
-# コンピュータ名を取得
-host = socket.gethostname()
-print(host)  
-​
-# 経過時間を表示
-elapsed_time = t2-t1
-print(f"処理時間：{elapsed_time}")
+
+res=model.fit(datagen.flow(x_train, y_train, batch_size=32),\
+                        steps_per_epoch=int(len(x_train) / 32), \
+              epochs=epochs_num, validation_data=(x_test,y_test))
 ```
 
-
-
-
+result (res) に出力されたデータをプロットとして、モデルの学習曲線を見てみましょう。続いて図と計算結果のモデルを保存します。
 
 ```python
-# result(res)に出力されたデータをプロットする。
-# 図と計算結果のモデルを保存する。
 import matplotlib.pyplot as plt
 %matplotlib inline
+
 acc=res.history['accuracy']
 loss=res.history['loss']
 val_acc=res.history['val_accuracy']
@@ -405,21 +393,111 @@ val_loss=res.history['val_loss']
 epochs=range(1,len(acc)+1)
 fig, ax1= plt.subplots(figsize=(10,8))
 ax2=ax1.twinx()
-ax1.plot(epochs, acc, 'go', label='training accuracy')
-ax2.plot(epochs, loss, 'c^', label='training loss')
-ax1.plot(epochs, val_acc, 'bo', label='validation accuracy')
-ax2.plot(epochs, val_loss, 'm^', label='validation loss')
+ax1.plot(epochs, acc, '-go', label='training accuracy')
+ax2.plot(epochs, loss, '-c^', label='training loss')
+ax1.plot(epochs, val_acc, '-bo', label='validation accuracy')
+ax2.plot(epochs, val_loss, '-m^', label='validation loss')
 ax1.set_xlabel('epochs')
 ax1.set_ylabel('accuracy')
 ax2.set_ylabel('loss')
 ax1.legend()
 ax2.legend()
-plt.savefig('test.png')
+plt.savefig('Datascience_AI/CV/CNN/history/CNN_bark_'+str(imsz)+'_'+str(epochs_num)+'epo.png')
 plt.show()
 # modelを保存する。
-model.save('1stCNN_WIG_64_64_10epo.h5')
+model.save('Datascience_AI/CV/CNN/model/CNN_bark_'+str(imsz)+'_'+str(epochs_num)+'epo.h5')
 ```
 
+![](./img/history.png)
+
+学習用データから作成するモデルの精度はどんどん上昇していますが、評価用のデータを使った精度の向上は頭打ちとなり、50試行回を超えると誤差も小さくならなりました。この原因は、モデルが学習用のデータに合いすぎた、つまり勉強のしすぎです。このような現象を「過学習」といい、機械学習では注意するべきことの一つですが、学習用データを増やすこと以外にも、ネットワークに工夫するなど様々な対策がとられるところです。ここでは触れずに置きます。さて、次にこの不完全なモデルで、実際のテスト画像をいくつか予測してみましょう。
+
+```python
+hdf_source='Datascience_AI/CV/CNN/model/CNN_bark_128_100epo.h5'
+
+batch_size_is=24
+
+datagen = ImageDataGenerator()
+testgen=datagen.flow(x_test,y_test, batch_size=24)
+
+new_model = tf.keras.models.load_model(hdf_source)
+
+X,Y=testgen.__next__()
+true_classes=np.argmax(Y, axis=1)
+preds_ft = new_model.predict(X)
+pred_classes_ft = np.argmax(preds_ft, axis=1)
+
+# Get the names of classes
+class_names=train['arr_2']
+
+fig, ax= plt.subplots(nrows=batch_size_is, ncols=2, figsize=(8, 40))
+for i in range(batch_size_is):
+    best_5=np.argsort(preds_ft[i])[-5:]
+    ax[i,0].imshow(X[i]/ 2 + 0.5)
+    ax[i,0].set_title(str(np.array(class_names)[true_classes[i]]),fontsize=10)
+    ax[i,0].axis('off')
+    label=np.array(class_names)[best_5]
+    ax[i,1].barh(label,preds_ft[i][best_5])
+    ax[i,1].set_yticks([0, 1, 2, 3, 4])
+    ax[i,1].set_yticklabels(label,rotation=0,ha='right', fontsize=10)       
+fig.tight_layout()
+plt.savefig('Datascience_AI/CV/CNN/prediction/prediction_tmp.jpg',dpi=200)
+plt.show()
+```
+
+![](./img/judged_bark.png)
 
 
-oth CNN 1st CNN GIT にコピーすること。
+
+以上、４層のCNNによる街路樹樹皮の自動認識の試みでした。
+
+<br>
+
+### ８ー５　進化するネットワーク
+
+深層学習の分野における進歩には目を見張るものがあり、数学的な基礎から応用技術に至るまで広範です。今後農学分野でどのような利用があるか、また環境データサイエンスという枠組みの中でとのような進展があるか、予想もつきません。私が機械学習に興味を持った時点では、人のできない判断や予想ができるということで、専門性を必要としない樹種の同定や、木材を使う上での物性の予測ができれば良い程度に思っていました。今や、人ができないことをずっと上手くやるということがあながち無理ではないと感じています。そういう感覚を持った原因となった展開の一つが、**生成ディープラーニング**(generative deep learning)です。
+
+![](./img/GDL.png)
+
+<br>
+
+簡単にいうと、画像を学習し、自ら画像を作り出すネットワーク、音楽を学び、自ら作曲するネットワークです。私のラボでも、この方法で木材の細胞を一つ一つ認識して、細胞種ごとに名前をつけて、計測してということが可能になりました。また、低倍率の実体顕微鏡画像から道管を自動的に認識して、一つの年輪から取り出すような作業も自動化できるようになりました。このような技術をどのように研究に活かせていくか、過度に依存するのも問題のようには思いますが、確実に重要な技術になるように感じます。
+
+<img src="./img/vessel_seg.png" style="zoom:80%;" />
+
+
+
+<br>
+
+最後に以下のサイトを参照しながら、技術者の方がどのような仕事を進めているか見てみましょう。
+
+https://thecores.denso.com/ja/robot01/?utm_source=google&utm_medium=cpc&utm_campaign=rebranding&gclid=EAIaIQobChMInsC59ovq9AIVxbWWCh1t5A2wEAAYASAAEgIvwPD_BwE
+
+
+
+興味のある人は：
+
+Semantic segmentation:
+
+GAN: *Generative Adversarial Network*
+
+など調べてみてください。
+
+<br>
+
+------
+
+<br>
+
+以上：　この講義ノートに関して、誤字脱字を含め、ご意見ありましたらよろしく願います。　
+
+2021年12月18日
+
+​                                                                京都大学大学院　農学研究科　森林科学専攻　杉山淳司　sugiyama.junji.6m@kyoto-u.ac.jp
+
+<br>
+
+------
+
+<br>
+

@@ -398,3 +398,8 @@ plot_decision_regions(X_xor, Y_xor, classifier=clf, resolution=0.02)
 
 このように、線形ではできないような判別が非線形の判別器では可能です。
 
+<br>
+
+------
+
+<br>
