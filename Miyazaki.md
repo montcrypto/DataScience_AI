@@ -1,4 +1,26 @@
+# 環境データサイエンスとAI
+
+# Data science and Artificial Intelligence in Environmental and Agricultural Science
+
+
+
+
+
+## 令和 3 年 12 ⽉ 25 ⽇〜28 ⽇
+
+
+
+
+
+### 京都大学大学院農学研究科　杉⼭淳司
+
+
+
+<div style="page-break-before:always">
+
 [TOC]
+
+<div style="page-break-before:always">
 
 # DataScience_AI
 
@@ -22,6 +44,8 @@ Materials for lecture 2021 MU
 6) Pythonプログラミング入門, 東京大学 数理・情報教育研究センター (CC BY-NC-ND 4.0), https://utokyo-ipp.github.io/index.html
 
 <br>
+
+<div style="page-break-before:always">
 
 ------
 
@@ -61,7 +85,7 @@ Colaboratory（略称: Colab）は,  ブラウザから Python を記述,  実�
 
 https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU_qrC0
 
-
+<div style="page-break-before:always">
 
 <br>
 
@@ -115,7 +139,7 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 
 <br>
 
-上の演算子を使って割り算の関数`warizan()`を作ります. 入力は2つ （x と y)　商と余りを返すことします. 
+上の演算子を使って割り算の関数`warizan()`を作ります. 入力は2つ （x と y)　商と余りを返すこととします. 
 
 ```python
 >>> a=5.0  # .0 をつけて浮動小数点数と定義する
@@ -146,7 +170,7 @@ https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja#scrollTo=5fCEDCU
 
 ２）1)を計算する関数を作りなさい. 
 
-<br>
+<div style="page-break-before:always"><br>
 
 ------
 
@@ -270,6 +294,7 @@ False
 >>> list(kyoto) # 型の変換
 [35.02139, 135.75556]
 >>> yakusho_dic={'大阪':osaka,'京都':kyoto}
+>>> yakusho_dic
 {'大阪':(34.68639, 135.52), '京都': (35.02139, 135.75556)}
 ```
 
@@ -289,7 +314,7 @@ False
 
 
 
-<br>
+<div style="page-break-before:always">
 
 ------
 
@@ -368,19 +393,19 @@ False
 例えば解析用に作ったデータの中にいわゆる不可視ファイル（実際に存在はするのだけど画面上には表示されないシステムが使うファイル）があります. ところが,  プログラムでデータを読み込むとファイルが全部読まれてしまいします. それを避けてファイルを読むには次のように処理します. 
 
 ```python
->>> My_jpg_list=[]
->>> My_list=os.listdir('Gazou')
+>>> My_png_list=[]
+>>> My_list=os.listdir('_data/CV')
 >>> for filename in My_list:
-...		if filename.endswith('.jpg')
+...		if filename.endswith('.png'):
 ...			My_jpg_list.append(filename)
-...		else 
-...			print(filename+'is not a jpg file !')
->>> My_jpg_list
+...		else :
+...			print(filename+'is not a png file !')
+>>> My_png_list
 ```
 
 <br>
 
-上の例では,  Gazouのファイルにあるファイルのうち,  拡張子が.jpgでないものを無視してjpegファイルのみのリストをMy_jpg_listに格納します. 複数の用件を同時に満足する,  あるいはどちらかを満足するという条件が必要な場合は,  `and` あるいは`or` で複数の条件を併記します. 
+上の例では,  `_data/CV`のディレクトリにあるファイルのうち,  拡張子が.pngでないものを無視してpngファイルのみのリストをMy_png_listに格納します. 複数の用件を同時に満足する,  あるいはどちらかを満足するという条件が必要な場合は,  `and` あるいは`or` で複数の条件を併記します. 
 
 ```python
 >>> testdata=[1,2,3,4,5,6,7,8,9,0]
@@ -403,10 +428,13 @@ False
 
 繰り返しと条件文は数行のプログラムで書けるものですが,  内包的表現を使うと１行で書くことができます. 
 
-例えば ある特定のディレクトリの中から特定の拡張子のファイルだけを読み出したい場合,  そのリストを作るには次のようにします. 
+例えば ある特定のディレクトリの中から特定の拡張子のファイルだけを読み出したい場合など, そのリストを作るのに便利です.  
+
+次のコードは `_data/GSI`のディレクトリにあるCSVファイルを指定して読み込みます. CSVファイルとは, 「comma separated values」の略称を指し, データを[ , ]で区切って書いたテキストファイル・データのことで, ファイルの拡張子は「.csv」です.
 
 ```python
-[fl for fl in os.listdir('my_target_dir') if fl.endswith('.xlsx')]  ＃　例えばエクセルのファイル
+my_target_dir='_data/GSI'
+[fl for fl in os.listdir('my_target_dir') if fl.endswith('.CSV')]  ＃　例えばcsvのファイル
 ```
 
 <br>
@@ -414,7 +442,7 @@ False
 また,  不可視ファイルを除いたリストが欲しい場合（MacOSの場合は .filenameの形式で最初にドットがつきます）には次のようにします. 
 
 ```python
-[fl for fl in os.listdir('my_target_dir') if fl.startswith('.')]  ＃　例えば不可視ファイル
+[fl for fl in os.listdir(my_target_dir) if fl.startswith('.')]  ＃　例えば不可視ファイル
 ```
 
 <br>
@@ -423,7 +451,7 @@ False
 
 <br>
 
-これまで説明したイテレータは一度に全てのデータをメモリに読み込んでしまいます. パソコンのディレクトリの場合は問題なくても,  たとえば何千枚もの画像を読み込もうとするとメモリはパンクしてしまいます. ジェネレーターは,  そのような大きなイテラブルなオブジェクトに対して,  指定した大きさで逐次読み出しをするための仕組みです. 画像を扱う深層学習では普通に使うツールですので理解しておきましょう. 次の例は,  1から100の範囲,  増分３の等差数列から7で割り切れる数字を順に出力する例です. ２−４の関数では`return`で戻り値を得たのに対して,  ここではyield であることに注意です. 
+これまで説明したイテレータは一度に全てのデータをメモリに読み込んでしまいます. パソコンのディレクトリの場合は問題なくても,  たとえば何千枚もの画像を読み込もうとするとメモリはパンクしてしまいます. ジェネレーターは,  そのような大きなイテラブルなオブジェクトに対して,  指定した大きさで逐次読み出しをするための仕組みです. 画像を扱う深層学習では普通に使うツールですので理解しておきましょう. 次の例は,  1から100の範囲,  増分３の等差数列から7で割り切れる数字を順に出力する例です. ２−４の関数では`return`で戻り値を得たのに対して,  ここでは`yield` であることに注意です. 
 
 ```python
 >>> def generator(input):
@@ -444,6 +472,8 @@ False
 ２）2022年元旦から12月末まで木曜日の日付を出力しなさい. 
 
 <br>
+
+<div style="page-break-before:always">
 
 ------
 
@@ -496,7 +526,7 @@ array([[0.        , 2.07944154, 3.29583687],
        [2.07944154, 3.29583687, 4.15888308],
        [4.82831374, 0.        , 2.07944154],
        [3.29583687, 4.15888308, 4.82831374]])
->>> x=3*np.log(x)
+>>> y=3*np.log(x)
 ```
 
 <br>
@@ -514,16 +544,16 @@ array([[0.        , 2.07944154, 3.29583687],
 
 <br>
 
-上で作ったxでどのように出力されるか確認しましょう. 
+上で作ったyでどのように出力されるか確認しましょう. 
 
 ```python
->>>print(x.dtype)
+>>> print(y.dtype)
 float64
->>>print(x.shape)
+>>> print(y.shape)
 (5, 3)
->>>print(x.size)
+>>> print(y.size)
 15
->>>print(x.T)
+>>> print(y.T)
 [[0.         4.15888308 2.07944154 4.82831374 3.29583687]
  [2.07944154 4.82831374 3.29583687 0.         4.15888308]
  [3.29583687 0.         4.15888308 2.07944154 4.82831374]]
@@ -621,14 +651,14 @@ NumPy配列に組み込まれている統計量は以下の通りです. この�
 
 
 
-<br>複数のグラフを作ることも容易ですが,  文法が少し変わるので注意が必要です. $y=x$から1/3乗,  1/2乗,  1乗,  2乗,  3乗,  5乗の6つ　を２行３列に書くには
+<br>複数のグラフを作ることも容易ですが,  文法が少し変わるので注意が必要です. $y=x$から1乗,  2乗,  3乗,  5乗,  7乗,  11乗の6つを２行３列に表示するには` plt.subplots`を定義します. 
 
 ```python
 >>> fig, axes = plt.subplots(ncols=3,nrows=2, figsize=(12,8))
->>> power=[1/3,1/2,1,2,3,5]
+>>> power=[1,2,3,5,7,11]
 >>> for i,p in enumerate(power):
 ...     c,r=divmod(i,3)
-...     axes[c,r].plot(x,x**i,label="power of"+str(power[i]) )
+...     axes[c,r].plot(x,x**p,label="power of"+str(power[i]) )
 ...     axes[c,r].legend()
 ...     axes[c,r].set_xlabel('x')
 ...     axes[c,r].set_ylabel('y')
@@ -706,13 +736,15 @@ plt.show()
 
 <br>
 
+
+
+<div style="page-break-before:always">ga
+
+  
+
 ------
 
 <br>
-
-
-
-
 
 ## ６　地理情報データを扱う
 
@@ -766,7 +798,7 @@ import os
 import matplotlib.pyplot as plt
 import pandas as pd
 
-df_temple = pd.read_csv('DataScience_AI/data/GIS/Kyoto_Architecture.csv',\
+df_temple = pd.read_csv('_data/GIS/Kyoto_Architecture.csv',\
                         usecols = [2, 5, 8, 16, 17],\
                         dtype  = {'名称': str, '種別1': str, '時代': str, '緯度': float, '経度': float})
 df_temple = df_temple.rename(columns = {'名称': 'article', '種別1': 'category',\
@@ -789,7 +821,7 @@ plt.show()
 
 ```python
 import geopandas as gpd
-df_jap = gpd.read_file('DataScience_AI/data/GIS/japan.geojson')
+df_jap = gpd.read_file('_data/GIS/japan.geojson')
 
 
 colors=[]
@@ -839,8 +871,9 @@ plt.show()
 
 ```　　python
 import glob
-data_dir='../../GitHubData/DataScience_AI/data/GIS/e-Stat_Kokuzei_Shp' #
+data_dir='_data/GIS/e-Stat_Kokuzei_Shp' #
 prefecture_shp=sorted(glob.glob(data_dir+'/*/*.shp'))
+prefecture_shp
 ```
 
 <br>
@@ -899,7 +932,11 @@ plt.show()
 
 
 
-国土の電子情報については国土数値情報サイト(https://nlftp.mlit.go.jp/ksj/) に公開されています. これらのデータを空間的に,  あるいは時系列に重ねていくことで,  傾斜や高度による植生の違い,  またその時系列変化なども可視化することができます. 空間情報を利用して新しいビジネスをしょうとアイデアを持っている人もいるかもしれませんね. 　ここでは農林水産省林野庁が国有林GISで管理している地図データから,  全国の国有林野の小班区画ポリゴンデータをみてみましょう. ダウンロードサイトから,  関西地域の2府３県のデータを取得します. データは平成30（2018）年4月1日時点のShpファイルです. 次に,  国土地理院「基盤地図情報 数値標高モデル 」をベースとした標高傾斜度3次メッシュ（ラスター型データ）から,  相当する府県のデータを取得します. 
+国土の電子情報については国土数値情報サイト(https://nlftp.mlit.go.jp/ksj/) に公開されています. これらのデータを空間的に,  あるいは時系列に重ねていくことで,  傾斜や高度による植生の違い,  またその時系列変化なども可視化することができます.  
+
+空間情報を利用して新しいビジネスをしょうとアイデアを持っている人もいるかもしれませんね.  ここでは農林水産省林野庁が国有林GISで管理している地図データから,  全国の国有林野の小班区画ポリゴンデータをみてみましょう. ダウンロードサイト(https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A45.html)から,  関西地域の2府３県のデータを取得します. データは平成30（2018）年4月1日時点の**Shpファイル**です. 
+
+次に,  国土地理院「基盤地図情報 数値標高モデル 」をベースとした標高傾斜度3次メッシュ（ラスター型データ）から,  相当する府県のデータを取得します. 
 
 1) 関西地域の2府３県の国有林領域データ
 2) 標高傾斜度データから平均標高と最大傾斜度の数値データ
@@ -916,11 +953,11 @@ import geopandas as gpd
 import pandas as pd
 import numpy as np
 
-dat0_dir='../../GitHubData/DataScience_AI/data/GIS/e-Stat_Kokuzei_Shp' 
+dat0_dir='_data/GIS/e-Stat_Kokuzei_Shp' 
 prefecture_shp=sorted(glob.glob(dat0_dir+'/*/*.shp'))
-dat1_dir='../../GitHubData/DataScience_AI/data/GIS/標高傾斜度/' 
+dat1_dir='_data/GIS/標高傾斜度/' 
 slope_shp=sorted(glob.glob(dat1_dir+'/*/*.shp'))
-dat2_dir='../../GitHubData/DataScience_AI/data/GIS/国有林野データ/' 
+dat2_dir='_data/GIS/国有林野データ/' 
 rinya_shp=sorted(glob.glob(dat2_dir+'/*/*.shp'))
 
 
@@ -969,6 +1006,8 @@ plt.show()
 １）宮崎県の国有林を図示しなさい. 
 
 <br>
+
+<div style="page-break-before:always">
 
 ------
 
@@ -1219,7 +1258,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 %matplotlib inline
 #
-df=pd.read_excel('../../../GitHubData/Datascience_AI/data/Spectroscopy/2nd_Meranti.xlsx', index_col=0)
+df=pd.read_excel('_data/Spectroscopy/2nd_Meranti.xlsx', index_col=0)
 target_names=np.unique(df.index)
 tmp = pd.get_dummies(df.index)
 X_category = tmp.values.argmax(1) # make strings into numbers 0,1,2,...
@@ -1328,7 +1367,7 @@ plt.show()
 
 これを表に描くと次のようになります. それぞれの場合はx,y平面上に点として示したとき,  y=ax＋bの直線で論理回路が作れるか,  考えてみましょう. 
 
-![](./img/logicC.png)
+<img src="./img/logicC.png" style="zoom:67%;" />
 
 <br>
 
@@ -1374,6 +1413,8 @@ plot_decision_regions(X_xor, Y_xor, classifier=clf, resolution=0.02)
 このように,  線形ではできないような判別が非線形の判別器では可能です. 
 
 <br>
+
+<div style="page-break-before:always">
 
 ------
 
@@ -1439,7 +1480,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
 #
-img_name='../../../GitHubData/DataScience_AI/data/CV/apples.png'
+img_name='_data/CV/apples.png'
 im=Image.open(img_name)
 print('サイズは'+str(im.size)+':'+'階調は'+str(im.mode))
 # RGBAというタイプの画像だと分かったのでRGBに変換します. 
@@ -1505,7 +1546,7 @@ plt.show()
 
 ### ８ー３　深層学習とは
 
-<img src="./img/sl_dl.png" style="zoom:70%;" />
+<img src="./img/sl_dl.png" style="zoom:50%;" />
 
 <br>
 
@@ -1550,7 +1591,7 @@ $$
 
  
 
-<img src="./img/convolution.png" style="zoom:30%;" />
+<img src="./img/convolution.png" style="zoom:30%" />
 
 > CS231n Convolutional Neural Networks for Visual Recognition Course Website https://cs231n.github.io/convolutional-networks/
 >
@@ -1584,7 +1625,7 @@ wi=w.reshape(5,3,3)
 ```python
 from PIL import Image
 import matplotlib.pyplot as plt
-im=Image.open('lotus.png')
+im=Image.open('_data/CV/lotus.png')
 imc=np.array(im.convert('L'))
 plt.imshow(im)
 plt.axis('off')
@@ -1613,7 +1654,7 @@ for i in range(num):
 plt.show()
 ```
 
-<img src="./img/filter_img.png" style="zoom:50%;" />
+<img src="./img/filter_img.png" style="zoom:50%" />
 
 <br>
 
@@ -1634,13 +1675,13 @@ plt.show()
 img_mpx=measure.block_reduce(imgsum, (2,2), np.max)
 ```
 
-<img src="./img/max_pool.png" style="zoom:50%;" />
+<img src="./img/max_pool.png" style="zoom:50%" />
 
 <br>
 
 上の畳み込みとダウンサイジング・プーリングを繰り返してみます. 同じ5つのフィルター処理に加えて,  ストライド２で圧縮した画像は次のようになりました. 画像が簡略化されて,  特徴が単純化していくことがわかるでしょうか. 実際はフィルターが変数となって最小二乗法によって最適化されて,  より画像の特徴を捉えるように変化していく,  と考えてください. 
 
-<img src="./img/filter_stride_pool.png" style="zoom:50%;" />
+<img src="./img/filter_stride_pool.png" style="zoom:50%" />
 
 <br>
 
@@ -1669,8 +1710,8 @@ from tensorflow.keras import datasets, layers, models
 imsz=128
 epochs_num=100
 
-test=np.load('Datascience_AI/CV/CNN/test_128_128.npz')
-train=np.load('Datascience_AI/CV/CNN/train_128_128.npz')
+test=np.load('_data/CV/CNN/test_128_128.npz')
+train=np.load('_data/CV/CNN/train_128_128.npz')
 num_classes=len(train['arr_2'])
 x_train,y_train,x_test,y_test=train['arr_0'],train['arr_1'],test['arr_0'],test['arr_1']
 y_train = to_categorical(y_train, num_classes)
@@ -1783,10 +1824,10 @@ ax1.set_ylabel('accuracy')
 ax2.set_ylabel('loss')
 ax1.legend()
 ax2.legend()
-plt.savefig('Datascience_AI/CV/CNN/history/CNN_bark_'+str(imsz)+'_'+str(epochs_num)+'epo.png')
+plt.savefig('_data/CV/CNN/history/CNN_bark_'+str(imsz)+'_'+str(epochs_num)+'epo.png')
 plt.show()
 # modelを保存する. 
-model.save('Datascience_AI/CV/CNN/model/CNN_bark_'+str(imsz)+'_'+str(epochs_num)+'epo.h5')
+model.save('_data/CV/CNN/model/CNN_bark_'+str(imsz)+'_'+str(epochs_num)+'epo.h5')
 ```
 
 ![](./img/history.png)
@@ -1794,7 +1835,7 @@ model.save('Datascience_AI/CV/CNN/model/CNN_bark_'+str(imsz)+'_'+str(epochs_num)
 学習用データから作成するモデルの精度はどんどん上昇していますが,  評価用のデータを使った精度の向上は頭打ちとなり,  50試行回を超えると誤差も小さくならなりました. この原因は,  モデルが学習用のデータに合いすぎた,  つまり勉強のしすぎです. このような現象を「過学習」といい,  機械学習では注意するべきことの一つですが,  学習用データを増やすこと以外にも,  ネットワークに工夫するなど様々な対策がとられるところです. ここでは触れずに置きます. さて,  次にこの不完全なモデルで,  実際のテスト画像をいくつか予測してみましょう. 
 
 ```python
-hdf_source='Datascience_AI/CV/CNN/model/CNN_bark_128_100epo.h5'
+hdf_source='_data/CV/CNN/model/CNN_bark_128_100epo.h5'
 
 batch_size_is=24
 
@@ -1822,7 +1863,7 @@ for i in range(batch_size_is):
     ax[i,1].set_yticks([0, 1, 2, 3, 4])
     ax[i,1].set_yticklabels(label,rotation=0,ha='right', fontsize=10)       
 fig.tight_layout()
-plt.savefig('Datascience_AI/CV/CNN/prediction/prediction_tmp.jpg',dpi=200)
+plt.savefig('_data/CV/CNN/prediction/prediction_tmp.jpg',dpi=200)
 plt.show()
 ```
 
@@ -1838,13 +1879,13 @@ plt.show()
 
 深層学習の分野における進歩には目を見張るものがあり,  数学的な基礎から応用技術に至るまで広範です. 今後農学分野でどのような利用があるか,  また環境データサイエンスという枠組みの中でとのような進展があるか,  予想もつきません. 私が機械学習に興味を持った時点では,  人のできない判断や予想ができるということで,  専門性を必要としない樹種の同定や,  木材を使う上での物性の予測ができれば良い程度に思っていました. 今や,  人ができないことをずっと上手くやるということがあながち無理ではないと感じています. そういう感覚を持った原因となった展開の一つが,  **生成ディープラーニング**(generative deep learning)です. 
 
-![](./img/GDL.png)
+<img src="./img/GDL.png" style="zoom:80%;" />
 
 <br>
 
 簡単にいうと,  画像を学習し,  自ら画像を作り出すネットワーク,  音楽を学び,  自ら作曲するネットワークです. 私のラボでも,  この方法で木材の細胞を一つ一つ認識して,  細胞種ごとに名前をつけて,  計測してということが可能になりました. また,  低倍率の実体顕微鏡画像から道管を自動的に認識して,  一つの年輪から取り出すような作業も自動化できるようになりました. このような技術をどのように研究に活かせていくか,  過度に依存するのも問題のようには思いますが,  確実に重要な技術になるように感じます. 
 
-<img src="./img/vessel_seg.png" style="zoom:80%;" />
+<img src="./img/vessel_seg.png" style="zoom:60%;" />
 
 
 
@@ -1866,6 +1907,240 @@ GAN: *Generative Adversarial Network*
 
 <br>
 
+<div style="page-break-before:always">
+
+------
+
+
+
+## Appendix 1: 自作の関数・モジュール
+
+
+
+７章の最後に `from common.nir_ml import *` という表現をつかいました. 
+
+これは, **common**というディレクトリに保存した, **nir_ml.py** というコードを読み込んで, そこにコードしてある関数やクラスモジュールを呼び出せという意味です. この関数は, Sebastianの教科書に載っているモデルの境界領域を色分けして表示するためのものです. `import *` というアスタリスクは, 関数全部という意味ですが, この場合, 関数は一つしかないので, 
+
+```python
+from common.nir_ml import plot_decision_regions
+```
+
+と同じ意味です. 以下**nir_ml.py**の中身です. 
+
+```python
+from sklearn.svm import SVC
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.colors import ListedColormap
+
+def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
+　　'''
+    Sebastian Raschka, Python機械学習プログラミング  達人データサイエンティストによる理論と実践, \
+    株式会社クイープ, 福島 真太朗 (訳),インプレス, 2016 (第3版2020）
+  　'''　
+    markers = ('s', 'x', 'o', '^', 'v')
+    colors = ('red', 'blue', 'lightgreen', 'gray', 'cyan')
+    cmap = ListedColormap(colors[:len(np.unique(y))])
+    #labels=['Balau','Heavy Red Meranti','Light Red Meranti','White Meranti']
+    x1_min, x1_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    x2_min, x2_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx1, xx2 = np.meshgrid(np.arange(x1_min, x1_max, resolution),
+                           np.arange(x2_min, x2_max, resolution))
+    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
+    Z = Z.reshape(xx1.shape)
+    plt.contourf(xx1, xx2, Z, alpha=0.3, cmap=cmap)
+    plt.xlim(xx1.min(), xx1.max())
+    plt.ylim(xx2.min(), xx2.max())
+    # 全てのサンプルを表示
+    for idx, cl in enumerate(np.unique(y)):
+        plt.scatter(x=X[y == cl, 0], 
+                    y=X[y == cl, 1],
+                    alpha=0.8, 
+                    c=colors[idx],
+                    marker=markers[idx], 
+                    label=cl)
+    # テストサンプルに丸を付ける
+    if test_idx:
+        X_test, y_test = X[test_idx, :], y[test_idx]
+        plt.scatter(X_test[:, 0],
+                    X_test[:, 1],
+                    c='',
+                    alpha=1.0,
+                    linewidth=1,
+                    marker='o',
+                    s=100, 
+                    label='test set')
+    # グラフ表示
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.legend(loc='upper left')
+    plt.tight_layout()
+    plt.show()
+```
+
+同様の方法で, 自分でデザインしたよく使う関数やクラスを本体コードから分離することによって, 本体のコードが簡潔になりますし, また読みやすくなります. 
+
+<div style="page-break-before:always">
+
+------
+
+
+
+## Appendix 2: HDF (Hierarchical Data Format)
+
+> A versatile data model that can represent very complex data objects and a wide variety of metadata. A completely portable file format with no limit on the number or size of data objects in the collection.
+
+> **Hierarchical Data Format**（階層的データ形式, 略称：**HDF**）は, 大量のデータを格納および構造化するために設計された一連のファイル形式（**HDF4**, **HDF5**）. 米国立スーパーコンピュータ応用研究所で開発され, 非営利法人である HDF グループによってサポートされている. HDFグループは, HDF5 テクノロジーの継続的な開発と HDF で保存されたデータの継続的なアクセスを確保することを使命としている. (from Wikipedia)
+
+
+
+#### 木材情報学と教育用材鑑調査室デジタルデータベース
+
+>  https://repository.kulib.kyoto-u.ac.jp/dspace/handle/2433/250016
+
+木材教育の資源として主要な広葉樹の光学顕微鏡デジタルデータベース（XDD）を公開していす. そこからXDD16をダウンロードしてください. ファイルの名前は**WIG_v1.2.1_900.h5**で6GBあります. 
+
+```hdf
+HDF5
+フォルダ, ディレクトリ Group
+ファイル Dataset
+プロパティ Attribute
+```
+
+逐次データの階層を確かめながら見ていくことにしましょう. **Group**としてカタログされているディレクトリ名を見てみると, 科, 属, 種, プレパラート番号の順に名前が入っていることがわかります. 
+
+
+```python
+import h5py
+hdf_path="WIG_v1.2.1_900.h5"
+with h5py.File(hdf_path,'r') as f:
+    print('(1)- 1st level ')
+    print(list(f.keys()))
+    print('(2)-　2nd level, Group "Betulaceae" ')
+    print(list(f['Betulaceae/'].keys()))
+    print('(3)- 3rd level, Group "Betulaceae/Alnus"　')
+    print(list(f['Betulaceae/Alnus/'].keys()))
+    print('(4)- 4th level, Group "Betulaceae/Alnus/Alnus_firma" ')
+    print(list(f['Betulaceae/Alnus/Alnus_firma'].keys()))
+    print('(5)- 5th level, Group "Betulaceae/Alnus/Alnus_firma/prep_06341" ')
+    print(len(f['Betulaceae/Alnus/Alnus_firma/prep_06341']), ' images included')
+```
+
+```text
+(1)- 1st level 
+['Betulaceae', 'Cannabaceae', 'Fagaceae', 'Lauraceae', 'Magnoliaceae', 'Sapindaceae', 'Ulmaceae']
+(2)-　2nd level, Group "Betulaceae" 
+['Alnus', 'Betula', 'Carpinus', 'Corylus', 'Ostrya']
+(3)- 3rd level, Group "Betulaceae/Alnus"　
+['Alnus_firma', 'Alnus_hirsuta_var_hirsuta', 'Alnus_hirsuta_var_sibirica', 'Alnus_japonica_var_japonica', 'Alnus_matsumurae', 'Alnus_pendula', 'Alnus_sieboldiana', 'Alnus_viridis_subsp_maximowiczii']
+(4)- 4th level, Group "Betulaceae/Alnus/Alnus_firma" 
+['prep_06341', 'prep_10208', 'prep_10337', 'prep_10769', 'prep_10825']
+(5)- 5th level, Group "Betulaceae/Alnus/Alnus_firma/prep_06341" 
+9  images included
+```
+
+一枚取り出すには以下のようにします. 
+
+```python
+import matplotlib.pyplot as plt
+%matplotlib inline
+f=h5py.File(hdf_path,'r') 
+imgs=f['Cannabaceae/Celtis/Celtis_sinensis/KYOw_01137']
+fig = plt.subplots(figsize=(10,10))
+plt.imshow(imgs[2],cmap='gray')
+plt.show()
+```
+
+<img src="/Users/sugiyama/Documents/GitHub/DataScience_AI/img/certis.png" alt="png" style="zoom:30%;" />
+​    
+
+上の書き方だと, 一枚ごと名前を入力する必要がありますので, **hdfファイル**の全体のリストをまず取得してから, 再起的にオブジェクトをとりだすクラスを作成します. クラスのあるファイルは`common`ディレクトリの`wig.py`なので, 
+
+
+```python
+from common.wig import *
+hdf_path="WIG_v1.2.1_900.h5"
+f=h5py.File(hdf_path,'r')  
+mywood=WIGDataRead()
+mywood.pivot(f,'')
+```
+
+```
+			img num
+genus	class	species	
+Acer	Sapindaceae	Acer_amoenum	21
+Acer_argutum	10
+Acer_carpinifolium	25
+Acer_crataegifolium	24
+Acer_distylum	12
+...	...	...	...
+Trema	Cannabaceae	Trema_orientalis	55
+Ulmus	Ulmaceae	Ulmus_davidiana_var_japonica	109
+Ulmus_laciniata	129
+Ulmus_parvifolia	77
+Zelkova	Ulmaceae	Zelkova_serrata	128
+```
+
+つぎに, Fagaceaeのリストを見てみます. 関数`pivot(f,'Fagaceae')`をつかいます. 
+
+```python
+mywood.pivot(f,'Fagaceae')
+```
+
+```
+			img num
+genus	class	species	
+Castanea	Fagaceae	Castanea_crenata	177
+Castanopsis	Fagaceae	Castanopsis_cuspidata	148
+Castanopsis_sieboldii	150
+Fagus	Fagaceae	Fagus_crenata	225
+Fagus_japonica	180
+Lithocarpus	Fagaceae	Lithocarpus_edulis	99
+Lithocarpus_glaber	59
+Quercus	Fagaceae	Quercus_acuta	143
+Quercus_acutissima	109
+Quercus_crispula	266
+Quercus_dentata	39
+Quercus_gilva	109
+Quercus_glauca	132
+Quercus_myrsinifolia	168
+Quercus_phillyreoides	87
+Quercus_salicina	188
+Quercus_serrata	116
+Quercus_variabilis	51
+```
+
+最後に, Fagaceaeのデータベースから24枚ほどランダムに取り出して表示してみます. 関数`ImageDataGenerator(self, f, class_name='', target_label='species', size=(64,64), batch_size=100, shuffle=True)`をつかいます. 
+
+
+```python
+imgs=mywood.ImageDataGenerator(f, class_name='Fagaceae', target_label='species', \
+                    size=(124,124), batch_size=24, shuffle=True)
+labels=np.unique(mywood.get_labels(f, class_name='Fagaceae', target_label='species'))
+
+ncols=6
+nrows=4
+img_,label_ = next(imgs)
+
+fig, axes= plt.subplots(ncols=ncols,nrows=nrows,figsize=(12,8))
+
+for i,(im,lb) in enumerate(zip(img_,label_)): 
+    p,q=divmod(i,ncols)
+    axes[p,q].set_title(labels[np.argmax(lb)],fontsize=8,style='italic')
+    axes[p,q].imshow(im,cmap='gray')
+    axes[p,q].axis('off')
+plt.show()
+```
+
+<img src="/Users/sugiyama/Documents/GitHub/DataScience_AI/img/Fagaceae.png" alt="png" style="zoom:50%;" />
+​    
+
+The HDF group サイトhttps://www.hdfgroup.org　から　HDFView 3.1.3というviewerがダウンロードできます. 
+
+
+
+<div style="page-break-before:always">
+
 ------
 
 <br>
@@ -1874,7 +2149,7 @@ GAN: *Generative Adversarial Network*
 
 2021年12月18日
 
-​                                                                京都大学大学院　農学研究科　森林科学専攻　杉山淳司　sugiyama.junji.6m@kyoto-u.ac.jp
+​                          京都大学大学院　農学研究科　森林科学専攻　杉山淳司　sugiyama.junji.6m@kyoto-u.ac.jp
 
 <br>
 
