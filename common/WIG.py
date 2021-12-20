@@ -7,9 +7,16 @@ from PIL import Image
 from tensorflow.keras.utils import to_categorical
 from sklearn import preprocessing
 
-
-
 class WIGDataRead(object):
+    '''     
+    hdfdata, highest categolical index, index to be used for grouping, list of column index to be shown
+    全データから取り出す最上位の項目（’’は全データ）、グループ化のカテゴリー（例えば属の場合'genus')、ピボットに表示する項目のリスト（通常帆はグループ化する項目の上位項目を選択
+    example 
+    pivot(f,'Fagaceae','species',['class', 'genus','species']) ブナ科のデータを取り出し、種レベルでグループ化して画像の総数を出力。
+    pivot(f,'','genus',['class', 'genus']) 全ての科のデータを取り出し、属レベルでグループ化して画像の総数を出力。
+    pivot(f,'','genus',['class', 'genus']) 全ての科のデータを取り出し、属レベルでグループ化して画像の総数を出力。
+
+    '''
     def __init__(self):
         self.reset()
         
@@ -50,14 +57,6 @@ class WIGDataRead(object):
         df = pd.concat([df['sample name'].str.split('/', expand=True),df], axis=1).drop('sample name', axis=1)
         df.rename(columns={0: 'class', 1: 'genus', 2: 'species', 3: 'source'}, inplace=True)
         return df
-    
-    
-    # hdfdata, highest categolical index, index to be used for grouping, list of column index to be shown
-    # 全データから取り出す最上位の項目（’’は全データ）、グループ化のカテゴリー（例えば属の場合'genus')、ピボットに表示する項目のリスト（通常帆はグループ化する項目の上位項目を選択
-    # example 
-    #  pivot(f,'Fagaceae','species',['class', 'genus','species']) ブナ科のデータを取り出し、種レベルでグループ化して画像の総数を出力。
-    #  pivot(f,'','genus',['class', 'genus']) 全ての科のデータを取り出し、属レベルでグループ化して画像の総数を出力。
-    #  pivot(f,'','genus',['class', 'genus']) 全ての科のデータを取り出し、属レベルでグループ化して画像の総数を出力。
     
     def pivot(self,f,class_name,indexs={'class', 'genus','species'}): 
         df=self.table_sel_genus(f,class_name)

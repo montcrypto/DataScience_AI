@@ -740,7 +740,7 @@ plt.show()
 
 <div style="page-break-before:always">ga
 
-  
+
 
 ------
 
@@ -1340,7 +1340,11 @@ plt.show()
 
 
 
-#### ７ー４ー４ 「教師あり」と「教師なし」学習
+### ７ー５　判別モデルの作成
+
+<br>
+
+#### ７ー５ー１ 「教師あり」と「教師なし」学習
 
 主成分分析は,  サンプルのデータを線形結合して,  主成分軸のもとに次元の圧縮を行い,  サンプルに内在する傾向を見事に捉えました. 上の図①のPC1 vs PC2のグラフをもう一度に見てみましょう. ４つの樹種が綺麗に分かれているので,  その間を分けるような方程式を立てれば,  十分に樹種を識別するためのモデルとしても使えることがわかるでしょう. このようにデータを解析して何らかのモデルをつくることを学習といいます. しかし,  計算の過程では,  サンプルがどのグループに属しているのか未知のまま解析しました. この場合「**教師なし**」の学習といい,  主成分分析はその代表格です. 
 
@@ -1413,6 +1417,82 @@ plot_decision_regions(X_xor, Y_xor, classifier=clf, resolution=0.02)
 このように,  線形ではできないような判別が非線形の判別器では可能です. 
 
 <br>
+
+#### ７ー５ー５　サーポートベクターマシンによるスペクトルの判別
+
+<br>
+
+では最後に, 上で紹介した４種類の木材の判別モデルをサポートベクターマシン(SVM)を使って実装してみます. 
+
+手順は以下の通りです. 
+
+sklearnのtrain_test_splitを使って, 入力する２次微分スペクトルを学習用とテスト用の二つに分けます. 下の例では比率20%としました. 本来は, SVMのパラメータをいくつか振って一番正解が多くなるところを見つけます. そのために, GridSrearchCVという関数をつかうのですが, 下の例では, `{'C':[0.1],'gamma':[0.1],'kernel':['rbf']}`のところで1条件しか入れてておらず, すでに最適化した際のパラメータを入力しています. 
+
+```Python
+# SVM analyses : wavenuber range  8000-4000 cm-1
+import pandas as pd
+from sklearn import svm
+from sklearn.model_selection import GridSearchCV
+import numpy as np
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+%matplotlib inline
+#
+df=pd.read_excel('_data/SP/2nd_Meranti.xlsx', index_col=0)
+X = df*1e4
+target_names=np.unique(df.index)
+tmp = pd.get_dummies(df.index)
+Y = tmp.values.argmax(1) # make strings into numbers 0,1,2,...
+sp_names = df.index
+#
+x_train,x_test,y_train,y_test=train_test_split(X,Y,test_size=0.20,random_state=77,stratify=Y)
+title = "SVM discriminant analysis from 8000-4000 cm-1 region"
+param_grid={'C':[0.1],'gamma':[0.1],'kernel':['rbf']}
+svc=svm.SVC(probability=True)
+model=GridSearchCV(svc,param_grid,verbose=2)
+
+model.fit(x_train,y_train)
+print(title)
+print('The Model is trained well with the given images')
+
+# model.best_params_ to get the best parameters from GridSearchCV
+```
+
+<br>
+
+モデルを作成した後は, テスト用データをモデルに入力して, 正しいラベル（樹種）が出力されるかの比率で精度を算出します. 
+
+```python
+from sklearn.metrics import accuracy_score
+
+x_test_f=np.array(x_test)
+y_pred=model.predict(x_test_f)
+print(f"The model is {accuracy_score(y_pred,y_test)*100}% accurate")
+```
+
+結果として判別性能100%のモデルができたことになります. 
+
+<br>
+
+### ７ー６　練習
+
+<br>
+
+１）７ー５の例では2000個のスペクトルデータを判別に使用した. これをPCAで次元圧縮して得られる10個の情報を使ってやりなさい. 
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div style="page-break-before:always">
 
@@ -1691,7 +1771,9 @@ img_mpx=measure.block_reduce(imgsum, (2,2), np.max)
 
 <br>
 
-### ８ー４　簡単な識別ネットワークの試作
+### ８ー４　識別ネットワークの試作
+
+#### ８ー４ー１　CNNの実装と実際
 
 数年前,  農工大の学生さん達と京都御所に植栽されている樹木の樹皮の画像データベースを作りました. 各自撮影した写真を樹種ごとにフォルダにまとめ,  各画像の中心部分から$128 \times 128$ pixelの画像を切りとったのが下の図です. 全体の85%のデータを学習用に,  残りの15％を評価用としてtrainとtestデータベースを準備します. 
 
@@ -1874,6 +1956,77 @@ plt.show()
 以上,  ４層のCNNによる街路樹樹皮の自動認識の試みでした. 
 
 <br>
+
+#### ８ー４ー２　CNNのメリット
+
+７章で取り上げた, SVMはスペクトルのデータを見事に判別しました. その時はモデルに入力したデータは2000個の１次元のデータでした. 一方８章で扱った画像は$128\times128\times3$（pixel, pixel, channel)の２次元のデータです. そこにCNNという新しい概念を応用して, ニューラルネットに組み込みました. 
+
+すこしもどって, 画像を一次元にしてSVMで判別させたらどうなるか試してみます. 画像は49152個の１次元データとして扱われますう. 
+
+```python
+from sklearn import svm
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import accuracy_score
+import numpy as np
+
+test=np.load('_data/CV/CNN/test_128_128.npz')
+train=np.load('_data/CV/CNN/train_128_128.npz')
+num_classes=len(train['arr_2'])
+x_train,y_train,x_test,y_test=train['arr_0'],train['arr_1'],test['arr_0'],test['arr_1']
+x_train_f=x_train.reshape(1170,128*128*3)
+
+param_grid={'C':[1],'gamma':[0.0001],'kernel':['rbf']}
+svc=svm.SVC(probability=True)
+model=GridSearchCV(svc,param_grid,verbose=2)
+
+model.fit(x_train_f,y_train)
+print('The Model is trained well with the given images')
+
+# model.best_params_ contains the best parameters obtained from GridSearchCV
+
+x_test_f=x_test.reshape(234,128*128*3)
+y_pred=model.predict(x_test_f)
+print(f"The model is {accuracy_score(y_pred,y_test)*100}%3d accurate")
+```
+
+結果は26％程度で, 全く識別モデルとしては体をなしません. 
+
+次に, テスト画像をどのように判別したか出力してみます. 
+
+```python
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+x_test_f=x_test.reshape(234,128*128*3)
+y_pred=model.predict(x_test_f)
+print(f"The model is {accuracy_score(y_pred,y_test)*100}%3d accurate")
+
+batch_size_is=24
+
+true_classes=y_test
+preds_ft = model.predict_proba(x_test_f)
+
+# Get the names of classes
+class_names=train['arr_2']
+
+fig, ax= plt.subplots(nrows=batch_size_is, ncols=2, figsize=(8, 40))
+for i in range(batch_size_is):
+    best_5=np.argsort(preds_ft[i])[-5:]
+    ax[i,0].imshow(x_test_f[i].reshape(128,128,3)/ 2 + 0.5)
+    ax[i,0].set_title(str(np.array(class_names)[true_classes[i]]),fontsize=10)
+    ax[i,0].axis('off')
+    label=np.array(class_names)[best_5]
+    ax[i,1].barh(label,preds_ft[i][best_5])
+    ax[i,1].set_yticks([0, 1, 2, 3, 4])
+    ax[i,1].set_yticklabels(label,rotation=0,ha='right', fontsize=10)       
+fig.tight_layout()
+plt.savefig('_data/CV/CNN/prediction/prediction_svm.jpg',dpi=200)
+plt.show()
+```
+
+アカマツのように特に赤っぽいものは正確に識別されましたが, そのほかは全く予想が効かないようです. その理由について考えてみましょう. 
+
+
 
 ### ８ー５　進化するネットワーク
 
