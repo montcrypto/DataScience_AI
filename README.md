@@ -1,18 +1,12 @@
 
 
-# 環境データサイエンスとAI
+## 環境データサイエンスのノート
 
-# Data science and Artificial Intelligence in Environmental and Agricultural Science
-
-
+### Data science and Artificial Intelligence in Environmental and Agricultural Science
 
 
 
-### 令和 5 年 12 ⽉ 25 ⽇〜28 ⽇
-
-
-
-
+### 令和3年度、令和 5 年度＠宮崎大学農学部
 
 #### 京都大学大学院農学研究科　杉⼭淳司
 
@@ -24,7 +18,7 @@
 
 
 
-<img src="./img/mobile2.png" alt="mobile2" style="zoom:48%;" />
+<img src="./img/mobile2.png" alt="mobile2" style="zoom:30%;" />
 
 
 
@@ -34,11 +28,11 @@
 
 <div style="page-break-before:always">
 
-# DataScience_AI
+## 
 
 <br>
 
-#　「環境データサイエンスとAI」
+##　「環境・農学のデータサイエンスとAI」
 
 <br>
 
