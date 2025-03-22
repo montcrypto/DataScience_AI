@@ -27,9 +27,6 @@
 [TOC]
 
 <div style="page-break-before:always">
-
-## 
-
 <br>
 
 ##　「環境・農学のデータサイエンスとAI」
